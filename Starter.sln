@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0F945BC7-B62B-48C1-88D1-76FC8F3A963B}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Main", "src\Main\Main.csproj", "{E6199770-0ED9-4E3B-A71A-90BDD8679E0E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{C061174B-C7D8-4F63-9BC1-F6FB892CEC91}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Strings", "shared\Strings\Strings.shproj", "{8F64AD08-39F7-4E97-9F80-B79531CF2EA0}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		shared\Strings\Strings.projitems*{8f64ad08-39f7-4e97-9f80-b79531cf2ea0}*SharedItemsImports = 13
+		shared\Strings\Strings.projitems*{e6199770-0ed9-4e3b-a71a-90bdd8679e0e}*SharedItemsImports = 4
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|ARM64 = Debug|ARM64
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|ARM = Release|ARM
+		Release|ARM64 = Release|ARM64
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E6199770-0ED9-4E3B-A71A-90BDD8679E0E}.Debug|ARM.ActiveCfg = Debug|ARM
+		{E6199770-0ED9-4E3B-A71A-90BDD8679E0E}.Debug|ARM.Build.0 = Debug|ARM
+		{E6199770-0ED9-4E3B-A71A-90BDD8679E0E}.Debug|ARM.Deploy.0 = Debug|ARM
+		{E6199770-0ED9-4E3B-A71A-90BDD8679E0E}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{E6199770-0ED9-4E3B-A71A-90BDD8679E0E}.Debug|ARM64.Build.0 = Debug|ARM64
+		{E6199770-0ED9-4E3B-A71A-90BDD8679E0E}.Debug|ARM64.Deploy.0 = Debug|ARM64
+		{E6199770-0ED9-4E3B-A71A-90BDD8679E0E}.Debug|x64.ActiveCfg = Debug|x64
+		{E6199770-0ED9-4E3B-A71A-90BDD8679E0E}.Debug|x64.Build.0 = Debug|x64
+		{E6199770-0ED9-4E3B-A71A-90BDD8679E0E}.Debug|x64.Deploy.0 = Debug|x64
+		{E6199770-0ED9-4E3B-A71A-90BDD8679E0E}.Debug|x86.ActiveCfg = Debug|x86
+		{E6199770-0ED9-4E3B-A71A-90BDD8679E0E}.Debug|x86.Build.0 = Debug|x86
+		{E6199770-0ED9-4E3B-A71A-90BDD8679E0E}.Debug|x86.Deploy.0 = Debug|x86
+		{E6199770-0ED9-4E3B-A71A-90BDD8679E0E}.Release|ARM.ActiveCfg = Release|ARM
+		{E6199770-0ED9-4E3B-A71A-90BDD8679E0E}.Release|ARM.Build.0 = Release|ARM
+		{E6199770-0ED9-4E3B-A71A-90BDD8679E0E}.Release|ARM.Deploy.0 = Release|ARM
+		{E6199770-0ED9-4E3B-A71A-90BDD8679E0E}.Release|ARM64.ActiveCfg = Release|ARM64
+		{E6199770-0ED9-4E3B-A71A-90BDD8679E0E}.Release|ARM64.Build.0 = Release|ARM64
+		{E6199770-0ED9-4E3B-A71A-90BDD8679E0E}.Release|ARM64.Deploy.0 = Release|ARM64
+		{E6199770-0ED9-4E3B-A71A-90BDD8679E0E}.Release|x64.ActiveCfg = Release|x64
+		{E6199770-0ED9-4E3B-A71A-90BDD8679E0E}.Release|x64.Build.0 = Release|x64
+		{E6199770-0ED9-4E3B-A71A-90BDD8679E0E}.Release|x64.Deploy.0 = Release|x64
+		{E6199770-0ED9-4E3B-A71A-90BDD8679E0E}.Release|x86.ActiveCfg = Release|x86
+		{E6199770-0ED9-4E3B-A71A-90BDD8679E0E}.Release|x86.Build.0 = Release|x86
+		{E6199770-0ED9-4E3B-A71A-90BDD8679E0E}.Release|x86.Deploy.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8F64AD08-39F7-4E97-9F80-B79531CF2EA0} = {C061174B-C7D8-4F63-9BC1-F6FB892CEC91}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3E5D458F-3E4B-47AF-A1DE-D3BAA82C73E7}
+	EndGlobalSection
+EndGlobal

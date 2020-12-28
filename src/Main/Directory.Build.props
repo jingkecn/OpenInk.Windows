@@ -1,0 +1,17 @@
+<!--
+~ INTRO:
+~ Directory.Build.props is imported very early in Microsoft.Common.props, and properties defined later are
+~ unavailable to it. So, avoid referring to properties that are not yet defined (and will evaluate to empty).
+~ See: https://docs.microsoft.com/en-us/visualstudio/msbuild/customize-your-build#import-order
+-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Condition="Exists($([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../')))" Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+    <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+        <AppxBundle>Never</AppxBundle>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+        <AppxBundle>Always</AppxBundle>
+        <AppxBundlePlatforms>ARM|ARM64|x64|x86</AppxBundlePlatforms>
+        <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
+    </PropertyGroup>
+</Project>

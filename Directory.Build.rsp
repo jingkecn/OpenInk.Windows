@@ -1,0 +1,45 @@
+# ================================================================================
+# Response (.rsp) files are text files that contain MSBuild.exe command-line switches.
+# Each switch can be on a separate line or all switches can be on one line.
+# Comment lines are prefaced with a # symbol.
+# The @ switch is used to pass another response file to MSBuild.exe.
+# See: https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-command-line-reference#switches
+# ================================================================================
+
+# Show detailed information at the end of the build log about the configurations that were built and how they were scheduled to nodes.
+-ds
+
+# Specifies the maximum number of concurrent processes to use when building.
+# If you don't include this switch, the default value is 1.
+# If you include this switch without specifying a value, MSBuild will use up to the number of processors in the computer.
+# See: https://docs.microsoft.com/en-us/visualstudio/msbuild/building-multiple-projects-in-parallel-with-msbuild
+-m
+
+# Set or override the specified project-level properties, where name is the property name and value is the property value.
+# Specify each property separately, or use a semicolon or comma to separate multiple properties.
+-p:Configuration=Debug
+
+# Runs the Restore target prior to building the actual targets.
+-restore
+
+# Build the specified targets in the project.
+# Specify each target separately, or use a semicolon or comma to separate multiple targets.
+-target:Build
+
+# Validate the project file and, if validation succeeds, build the project.
+# If you don't specify schema, the project is validated against the default schema.
+# If you specify schema, the project is validated against the schema that you specify.
+# The following setting is an example: -validate:MyExtendedBuildSchema.xsd
+-validate
+
+# Specifies the amount of information to display in the build log.
+# Each logger displays events based on the verbosity level that you set for that logger.
+# -verbosity:quiet
+# -verbosity:minimal
+-verbosity:normal
+# -verbosity:detailed
+# -verbosity:diagnostic
+
+# Insert command-line switches from a text file.
+# If you have multiple files, you specify them separately.
+# See: https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-response-files

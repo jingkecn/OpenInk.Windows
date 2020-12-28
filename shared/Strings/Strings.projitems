@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>8f64ad08-39f7-4e97-9f80-b79531cf2ea0</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Strings</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PRIResource Include="$(MSBuildThisFileDirectory)en-us\Resources.resw" />
+  </ItemGroup>
+</Project>
