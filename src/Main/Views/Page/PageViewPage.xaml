@@ -1,0 +1,142 @@
+<Page
+    x:Class="MyScript.OpenInk.Main.Views.Page.PageViewPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:enumerations="using:MyScript.InteractiveInk.Enumerations"
+    xmlns:iink="using:MyScript.InteractiveInk.UI.Xaml.Controls"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:page="using:MyScript.OpenInk.Main.Views.Page.Controls"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:vm="using:MyScript.OpenInk.Main.ViewModels"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{x:Bind ViewModel}">
+    <Page.Resources>
+        <vm:PageViewModel x:Name="ViewModel" />
+    </Page.Resources>
+    <muxc:NavigationView IsBackEnabled="{x:Bind ViewModel.CanGoBack, Mode=OneWay}"
+                         OverflowLabelMode="NoLabel"
+                         PaneDisplayMode="Top"
+                         BackRequested="{x:Bind ViewModel.InfrastructureServices.NavigationService.GoBack}">
+        <muxc:NavigationView.AutoSuggestBox>
+            <AutoSuggestBox QueryIcon="Find" />
+        </muxc:NavigationView.AutoSuggestBox>
+        <muxc:NavigationView.Header>
+            <iink:InteractiveInkToolbar HorizontalAlignment="Center"
+                                        TargetInkCanvas="{x:Bind InteractiveInkCanvas}" />
+        </muxc:NavigationView.Header>
+        <muxc:NavigationView.PaneFooter>
+            <page:PageCommandBar x:Name="TopCommandBar"
+                                 Background="Transparent"
+                                 DefaultLabelPosition="Right"
+                                 Visibility="Collapsed" />
+        </muxc:NavigationView.PaneFooter>
+        <muxc:NavigationView.PaneHeader>
+            <TextBlock Margin="{StaticResource SmallLeftMargin}"
+                       Style="{ThemeResource PageTitleTextBlockStyle}"
+                       Text="{x:Bind ViewModel.Book.Name, Mode=OneWay}" />
+        </muxc:NavigationView.PaneHeader>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <iink:InteractiveInkCanvas x:Name="InteractiveInkCanvas"
+                                           Background="White"
+                                           Editor="{x:Bind ViewModel.Editor, Mode=OneWay}"
+                                           Holding="OnHolding">
+                    <iink:InteractiveInkCanvas.ContextFlyout>
+                        <MenuFlyout>
+                            <MenuFlyoutSubItem Icon="Add"
+                                               IsEnabled="{x:Bind ViewModel.CanAddContent, Mode=OneWay}"
+                                               Text="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=CommandNew}">
+                                <MenuFlyoutItem
+                                    Command="{x:Bind ViewModel.InteractiveInkCommands.ContentCommands.CommandAdd}"
+                                    Text="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=ContentTypeDiagram}">
+                                    <MenuFlyoutItem.CommandParameter>
+                                        <enumerations:ContentType>Diagram</enumerations:ContentType>
+                                    </MenuFlyoutItem.CommandParameter>
+                                </MenuFlyoutItem>
+                                <MenuFlyoutItem
+                                    Command="{x:Bind ViewModel.InteractiveInkCommands.ContentCommands.CommandAdd}"
+                                    Text="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=ContentTypeDrawing}">
+                                    <MenuFlyoutItem.CommandParameter>
+                                        <enumerations:ContentType>Drawing</enumerations:ContentType>
+                                    </MenuFlyoutItem.CommandParameter>
+                                </MenuFlyoutItem>
+                                <MenuFlyoutItem
+                                    Command="{x:Bind ViewModel.InteractiveInkCommands.ContentCommands.CommandAdd}"
+                                    Text="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=ContentTypeMath}">
+                                    <MenuFlyoutItem.CommandParameter>
+                                        <enumerations:ContentType>Math</enumerations:ContentType>
+                                    </MenuFlyoutItem.CommandParameter>
+                                </MenuFlyoutItem>
+                                <MenuFlyoutItem
+                                    Command="{x:Bind ViewModel.InteractiveInkCommands.ContentCommands.CommandAdd}"
+                                    Text="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=ContentTypeRawContent}">
+                                    <MenuFlyoutItem.CommandParameter>
+                                        <enumerations:ContentType>RawContent</enumerations:ContentType>
+                                    </MenuFlyoutItem.CommandParameter>
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon Glyph="{StaticResource FontIconDraw}" />
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                            </MenuFlyoutSubItem>
+                            <MenuFlyoutItem
+                                Command="{x:Bind CommandDelete}"
+                                IsEnabled="{x:Bind ViewModel.CanRemoveContent, Mode=OneWay}" />
+                            <MenuFlyoutSeparator />
+                            <MenuFlyoutItem Command="{x:Bind CommandCopy}"
+                                            IsEnabled="{x:Bind ViewModel.CanCopyContent, Mode=OneWay}" />
+                            <MenuFlyoutItem Command="{x:Bind CommandPaste}"
+                                            IsEnabled="{x:Bind ViewModel.CanPasteContent, Mode=OneWay}" />
+                        </MenuFlyout>
+                    </iink:InteractiveInkCanvas.ContextFlyout>
+                    <iink:InteractiveInkCanvas.Resources>
+                        <StandardUICommand x:Name="CommandCopy"
+                                           Command="{x:Bind ViewModel.InteractiveInkCommands.ContentCommands.CommandCopy}"
+                                           Kind="Copy"
+                                           Label="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=CommandCopy}" />
+                        <StandardUICommand x:Name="CommandDelete"
+                                           Command="{x:Bind ViewModel.InteractiveInkCommands.ContentCommands.CommandDelete}"
+                                           Kind="Delete"
+                                           Label="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=CommandDelete}" />
+                        <StandardUICommand x:Name="CommandPaste"
+                                           Command="{x:Bind ViewModel.InteractiveInkCommands.ContentCommands.CommandPaste}"
+                                           Kind="Paste"
+                                           Label="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=CommandPaste}" />
+                    </iink:InteractiveInkCanvas.Resources>
+                </iink:InteractiveInkCanvas>
+                <toolkit:InAppNotification x:Name="InAppNotification"
+                                           StackMode="Replace" />
+            </Grid>
+            <page:PageStatusBar Grid.Row="1"
+                                Background="{ThemeResource SystemColorControlAccentBrush}"
+                                Padding="{StaticResource XxSmallLeftTopRightBottomMargin}" />
+            <page:PageCommandBar Grid.Row="2"
+                                 x:Name="BottomCommandBar"
+                                 DefaultLabelPosition="Right" />
+        </Grid>
+        <!--#region Visual States-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource LargeWindowSnapPoint}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!-- See: https://docs.microsoft.com/en-us/windows/uwp/design/layout/screen-sizes-and-breakpoints-for-responsive-design#general-recommendations-->
+                        <Setter Target="TopCommandBar.Visibility" Value="Visible" />
+                        <Setter Target="BottomCommandBar.Visibility" Value="Collapsed" />
+                        <!--TODO: (Small) Use an icon to represent search (don't show a search box).-->
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <!--#endregion-->
+    </muxc:NavigationView>
+</Page>

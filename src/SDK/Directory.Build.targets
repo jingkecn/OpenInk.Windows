@@ -1,0 +1,8 @@
+<!-- See: https://docs.microsoft.com/en-us/visualstudio/msbuild/customize-your-build#import-order -->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <!-- Import the outer common targets. -->
+    <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.targets', '$(MSBuildThisFileDirectory)../'))" />
+    <PropertyGroup>
+        <RootNamespace>$(Company).$(MyScriptSDK)</RootNamespace>
+    </PropertyGroup>
+</Project>

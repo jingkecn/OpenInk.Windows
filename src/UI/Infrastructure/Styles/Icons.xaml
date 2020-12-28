@@ -1,0 +1,25 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls">
+    <!-- Glyphs -->
+    <x:String x:Key="FontIconDictionary">&#xE82D;</x:String>
+    <x:String x:Key="FontIconDraw">&#xEC87;</x:String>
+    <x:String x:Key="FontIconLightBulb">&#xEA80;</x:String>
+    <x:String x:Key="FontIconLocaleLanguage">&#xF2B7;</x:String>
+    <x:String x:Key="FontIconNetworkOffline">&#xF384;</x:String>
+    <x:String x:Key="FontIconPinned">&#xE840;</x:String>
+    <x:String x:Key="FontIconQuickNote">&#xE70B;</x:String>
+    <x:String x:Key="FontIconRecent">&#xE823;</x:String>
+    <x:String x:Key="FontIconStatusCheckmark">&#xF1D8;</x:String>
+    <x:String x:Key="FontIconUpdateStatusDot">&#xF83F;</x:String>
+    <x:String x:Key="FontIconWalkSolid">&#xE726;</x:String>
+    <!-- Font icon sources -->
+    <FontIconSource x:Key="FontIconSourceLightBulb" Glyph="{StaticResource FontIconLightBulb}" />
+    <!-- Symbol icon sources -->
+    <SymbolIconSource x:Key="SymbolIconSourceAdd" Symbol="Add" />
+    <SymbolIconSource x:Key="SymbolIconSourceOpenLocal" Symbol="OpenLocal" />
+    <SymbolIconSource x:Key="SymbolIconSourceSaveLocal" Symbol="SaveLocal" />
+    <!-- Symbol icon source (WinUI) -->
+    <muxc:SymbolIconSource x:Key="WinUiSymbolIconSourceDelete" Symbol="Delete" />
+</ResourceDictionary>

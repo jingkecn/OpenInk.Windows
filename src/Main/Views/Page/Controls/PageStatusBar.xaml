@@ -1,0 +1,57 @@
+<UserControl
+    x:Class="MyScript.OpenInk.Main.Views.Page.Controls.PageStatusBar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    x:Name="UserControl">
+    <Grid Background="{x:Bind UserControl.Background, Mode=OneWay}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="0"
+                   Margin="{StaticResource SmallLeftRightMargin}"
+                   Style="{ThemeResource CaptionTextBlockStyle}"
+                   Text="{x:Bind ViewModel.Book.TargetFile.Path, Mode=OneWay}"
+                   TextTrimming="CharacterEllipsis"
+                   TextWrapping="NoWrap"
+                   ToolTipService.ToolTip="{x:Bind ViewModel.Book.TargetFile.Path, Mode=OneWay}" />
+        <TextBlock Grid.Column="1"
+                   Margin="{StaticResource SmallLeftRightMargin}"
+                   Style="{ThemeResource CaptionTextBlockStyle}">
+            <Run Text="{x:Bind ViewModel.Page.Index, Mode=OneWay}" />
+            <Run Text="/" />
+            <Run Text="{x:Bind ViewModel.Book.PageCount, Mode=OneWay}" />
+        </TextBlock>
+        <TextBlock Grid.Column="2"
+                   Margin="{StaticResource SmallLeftRightMargin}"
+                   Style="{ThemeResource CaptionTextBlockStyle}"
+                   Text="{x:Bind ViewModel.Page.Type, Converter={StaticResource TypeDescriptorConverter}, Mode=OneWay}" />
+        <TextBlock Grid.Column="3"
+                   Margin="{StaticResource SmallLeftRightMargin}"
+                   Style="{ThemeResource CaptionTextBlockStyle}"
+                   Text="{x:Bind ViewModel.Book.Language.PlatformModel.NativeName, Mode=OneWay}"
+                   ToolTipService.ToolTip="{x:Bind ViewModel.Book.Language.PlatformModel.DisplayName, Mode=OneWay}" />
+        <TextBlock Grid.Column="4"
+                   Margin="{StaticResource SmallLeftRightMargin}"
+                   Style="{ThemeResource CaptionTextBlockStyle}"
+                   Text="{x:Bind ViewModel.Book.TargetFile.Provider.DisplayName, Mode=OneWay}" />
+        <TextBlock Grid.Column="5"
+                   Margin="{StaticResource SmallLeftRightMargin}"
+                   Style="{ThemeResource CaptionTextBlockStyle}"
+                   Text="{x:Bind ViewModel.Book.TargetFileProperties.Size, Converter={StaticResource FileSizeToFriendlyStringConverter}, Mode=OneWay}" />
+        <TextBlock Grid.Column="6"
+                   Margin="{StaticResource SmallLeftRightMargin}"
+                   Style="{ThemeResource CaptionTextBlockStyle}"
+                   Text="{x:Bind ViewModel.Book.TargetFile.DisplayType, Mode=OneWay}" />
+    </Grid>
+</UserControl>

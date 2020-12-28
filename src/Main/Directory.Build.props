@@ -11,7 +11,7 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)' == 'Release'">
         <AppxBundle>Always</AppxBundle>
-        <AppxBundlePlatforms>ARM|ARM64|x64|x86</AppxBundlePlatforms>
+        <AppxBundlePlatforms>ARM64|x64|x86</AppxBundlePlatforms>
         <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
     </PropertyGroup>
 </Project>

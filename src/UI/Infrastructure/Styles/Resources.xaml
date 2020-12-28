@@ -1,0 +1,9 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="FontSizes.xaml" />
+        <ResourceDictionary Source="Icons.xaml" />
+        <ResourceDictionary Source="Sizes.xaml" />
+        <ResourceDictionary Source="Thickness.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

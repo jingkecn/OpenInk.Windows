@@ -1,0 +1,44 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Converters"
+    xmlns:local="using:MyScript.OpenInk.UI.Infrastructure.Converters"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:xaml="using:Windows.UI.Xaml">
+    <converters:BoolNegationConverter x:Key="BoolNegationConverter" />
+    <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    <converters:BoolToObjectConverter x:Key="BoolNegationToVisibilityConverter">
+        <converters:BoolToObjectConverter.FalseValue>
+            <xaml:Visibility>Visible</xaml:Visibility>
+        </converters:BoolToObjectConverter.FalseValue>
+        <converters:BoolToObjectConverter.TrueValue>
+            <xaml:Visibility>Collapsed</xaml:Visibility>
+        </converters:BoolToObjectConverter.TrueValue>
+    </converters:BoolToObjectConverter>
+    <converters:EmptyObjectToObjectConverter x:Key="EmptyObjectToBoolConverter">
+        <converters:EmptyObjectToObjectConverter.EmptyValue>
+            <x:Boolean>False</x:Boolean>
+        </converters:EmptyObjectToObjectConverter.EmptyValue>
+        <converters:EmptyObjectToObjectConverter.NotEmptyValue>
+            <x:Boolean>True</x:Boolean>
+        </converters:EmptyObjectToObjectConverter.NotEmptyValue>
+    </converters:EmptyObjectToObjectConverter>
+    <converters:EmptyObjectToObjectConverter x:Key="EmptyObjectToVisibilityConverter">
+        <converters:EmptyObjectToObjectConverter.EmptyValue>
+            <xaml:Visibility>Collapsed</xaml:Visibility>
+        </converters:EmptyObjectToObjectConverter.EmptyValue>
+        <converters:EmptyObjectToObjectConverter.NotEmptyValue>
+            <xaml:Visibility>Visible</xaml:Visibility>
+        </converters:EmptyObjectToObjectConverter.NotEmptyValue>
+    </converters:EmptyObjectToObjectConverter>
+    <local:BoolToObjectConverter x:Key="BoolToNavigationViewBackButtonVisibleConverter">
+        <local:BoolToObjectConverter.FalseValue>
+            <muxc:NavigationViewBackButtonVisible>Collapsed</muxc:NavigationViewBackButtonVisible>
+        </local:BoolToObjectConverter.FalseValue>
+        <local:BoolToObjectConverter.TrueValue>
+            <muxc:NavigationViewBackButtonVisible>Auto</muxc:NavigationViewBackButtonVisible>
+        </local:BoolToObjectConverter.TrueValue>
+    </local:BoolToObjectConverter>
+    <local:EnumToBoolConverter x:Key="EnumToBoolConverter" />
+    <local:FileSizeToFriendlyStringConverter x:Key="FileSizeToFriendlyStringConverter" />
+</ResourceDictionary>

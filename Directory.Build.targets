@@ -1,0 +1,7 @@
+<!-- See: https://docs.microsoft.com/en-us/visualstudio/msbuild/customize-your-build#import-order -->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <!-- Common -->
+    <PropertyGroup>
+        <RootNamespace>$(Company).$(Product).$(ProjectName)</RootNamespace>
+    </PropertyGroup>
+</Project>

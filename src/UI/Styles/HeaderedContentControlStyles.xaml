@@ -1,0 +1,27 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls">
+    <Style x:Key="PageContentWithHeaderStyle"
+           BasedOn="{StaticResource ContentWithHeaderStyle}"
+           TargetType="controls:HeaderedContentControl">
+        <Setter Property="HeaderTemplate" Value="{StaticResource PageHeaderTemplate}" />
+    </Style>
+    <Style x:Key="SectionContentWithHeaderStyle"
+           BasedOn="{StaticResource ContentWithHeaderStyle}"
+           TargetType="controls:HeaderedContentControl">
+        <Setter Property="HeaderTemplate" Value="{StaticResource SectionHeaderTemplate}" />
+    </Style>
+    <Style x:Key="ContentWithHeaderStyle"
+           BasedOn="{StaticResource ControlWithHeaderStyle}"
+           TargetType="controls:HeaderedContentControl">
+        <Setter Property="HeaderTemplate" Value="{StaticResource ContentHeaderTemplate}" />
+    </Style>
+    <Style x:Key="ControlWithHeaderStyle"
+           TargetType="controls:HeaderedContentControl">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+    </Style>
+</ResourceDictionary>

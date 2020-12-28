@@ -1,0 +1,42 @@
+<UserControl
+    x:Class="MyScript.OpenInk.Main.Views.Settings.Controls.ThemeSelector"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <controls:HeaderedContentControl
+        Header="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=TitleTheme}"
+        Style="{StaticResource SectionContentWithHeaderStyle}">
+        <muxc:RadioButtons Margin="{StaticResource XSmallTopBottomMargin}">
+            <RadioButton
+                Command="{x:Bind ViewModel.InfrastructureServices.ThemeService.CommandApplyTheme}"
+                Content="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=SettingsThemeSelectorLight}"
+                IsChecked="{x:Bind ViewModel.InfrastructureServices.ThemeService.Theme, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Light}">
+                <RadioButton.CommandParameter>
+                    <ElementTheme>Light</ElementTheme>
+                </RadioButton.CommandParameter>
+            </RadioButton>
+            <RadioButton
+                Command="{x:Bind ViewModel.InfrastructureServices.ThemeService.CommandApplyTheme}"
+                Content="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=SettingsThemeSelectorDark}"
+                IsChecked="{x:Bind ViewModel.InfrastructureServices.ThemeService.Theme, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Dark}">
+                <RadioButton.CommandParameter>
+                    <ElementTheme>Dark</ElementTheme>
+                </RadioButton.CommandParameter>
+            </RadioButton>
+            <RadioButton
+                Command="{x:Bind ViewModel.InfrastructureServices.ThemeService.CommandApplyTheme}"
+                Content="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=SettingsThemeSelectorDefault}"
+                IsChecked="{x:Bind ViewModel.InfrastructureServices.ThemeService.Theme, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Default}">
+                <RadioButton.CommandParameter>
+                    <ElementTheme>Default</ElementTheme>
+                </RadioButton.CommandParameter>
+            </RadioButton>
+        </muxc:RadioButtons>
+    </controls:HeaderedContentControl>
+</UserControl>

@@ -1,0 +1,36 @@
+<Page
+    x:Class="MyScript.OpenInk.Main.Views.Dashboard.DashboardViewPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:MyScript.OpenInk.Main.Views.Dashboard.Controls"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:navigation="using:MyScript.OpenInk.Main.Views.Dashboard.Navigation"
+    xmlns:vm="using:MyScript.OpenInk.Main.ViewModels"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{x:Bind ViewModel}">
+    <Page.Resources>
+        <vm:DashboardViewModel x:Name="ViewModel" />
+    </Page.Resources>
+    <muxc:NavigationView IsBackButtonVisible="Collapsed"
+                         IsSettingsVisible="False"
+                         OverflowLabelMode="NoLabel"
+                         PaneDisplayMode="Top"
+                         BackRequested="{x:Bind ViewModel.InfrastructureServices.NavigationService.GoBack}">
+        <muxc:NavigationView.PaneHeader>
+            <TextBlock Margin="{StaticResource MediumLeftMargin}"
+                       Style="{StaticResource PageTitleTextBlockStyle}"
+                       Text="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=TitleDashboard}" />
+        </muxc:NavigationView.PaneHeader>
+        <Grid Margin="{StaticResource MediumLeftTopRightMargin}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <controls:StartControl Grid.Row="0" />
+            <navigation:TemplatesPivot Grid.Row="1" />
+        </Grid>
+    </muxc:NavigationView>
+</Page>

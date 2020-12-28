@@ -1,0 +1,26 @@
+<ResourceDictionary
+    x:Class="MyScript.OpenInk.UI.Templates.ContentHeaderTemplates"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DataTemplate x:Key="PageHeaderTemplate"
+                  x:DataType="x:String">
+        <Grid Margin="{StaticResource SmallBottomMargin}">
+            <TextBlock Style="{StaticResource PageTitleTextBlockStyle}"
+                       Text="{x:Bind}" />
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="SectionHeaderTemplate"
+                  x:DataType="x:String">
+        <Grid Margin="{StaticResource XSmallBottomMargin}">
+            <TextBlock Style="{StaticResource SectionTitleTextBlockStyle}"
+                       Text="{x:Bind}" />
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="ContentHeaderTemplate"
+                  x:DataType="x:String">
+        <Grid Margin="{StaticResource XxSmallBottomMargin}">
+            <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
+                       Text="{x:Bind}" />
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

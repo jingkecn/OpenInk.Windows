@@ -1,0 +1,10 @@
+# Temporary folders
+_[Tt]emp/
+
+# Resources and configuration files are automatically downloaded from remote server.
+*.conf
+*.res
+
+# Languages configurations are automatically downloaded from remote server.
+[Ll]anguages.json
+[Ll]anguages.[Ss]chema.json

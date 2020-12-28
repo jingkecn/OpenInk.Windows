@@ -1,0 +1,37 @@
+<UserControl
+    x:Class="MyScript.OpenInk.Main.Views.Settings.Controls.LanguageManager"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <controls:HeaderedContentControl
+        Header="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=TitleLanguages}"
+        Style="{StaticResource SectionContentWithHeaderStyle}">
+        <StackPanel>
+            <TextBlock Style="{ThemeResource ContentTextBlockStyle}"
+                       Text="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=LanguagesManagerDescription}" />
+            <ListView HorizontalAlignment="Left"
+                      IsItemClickEnabled="True"
+                      ItemsSource="{x:Bind ViewModel.InstalledLanguages, Mode=OneWay}"
+                      ItemTemplate="{StaticResource LanguageListViewItemTemplate}"
+                      Margin="{StaticResource SmallTopMargin}"
+                      MaxWidth="{StaticResource ContentDialogMaxWidth}"
+                      SelectionMode="None"
+                      ItemClick="OnItemClick">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        <Setter Property="Padding" Value="0" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+            <Button Command="{x:Bind ViewModel.CommandManageLanguages}"
+                    Content="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=CommandManage}"
+                    Margin="{StaticResource SmallTopMargin}" />
+        </StackPanel>
+    </controls:HeaderedContentControl>
+</UserControl>

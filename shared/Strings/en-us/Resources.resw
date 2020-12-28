@@ -118,9 +118,153 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppDescription" xml:space="preserve">
-    <value>A starter for UWP development.</value>
+    <value>This app is an interactive companion to the MyScript Interactive Ink SDK.</value>
   </data>
   <data name="AppDisplayName" xml:space="preserve">
-    <value>Starter</value>
+    <value>Open Ink</value>
+  </data>
+  <data name="BookNameDefault" xml:space="preserve">
+    <value>Untitled</value>
+  </data>
+  <data name="CommandAdd" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="CommandCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CommandClearAll" xml:space="preserve">
+    <value>Clear all</value>
+  </data>
+  <data name="CommandCopy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="CommandDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="CommandDoNotSave" xml:space="preserve">
+    <value>Don't save</value>
+  </data>
+  <data name="CommandGetStarted" xml:space="preserve">
+    <value>Get started</value>
+  </data>
+  <data name="CommandManage" xml:space="preserve">
+    <value>Manage</value>
+  </data>
+  <data name="CommandNew" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="CommandOpen" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="CommandPaste" xml:space="preserve">
+    <value>Paste</value>
+  </data>
+  <data name="CommandRedo" xml:space="preserve">
+    <value>Redo</value>
+  </data>
+  <data name="CommandSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="CommandSaveAs" xml:space="preserve">
+    <value>Save as</value>
+  </data>
+  <data name="CommandTypeset" xml:space="preserve">
+    <value>Typeset</value>
+  </data>
+  <data name="CommandUndo" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="CommandUninstall" xml:space="preserve">
+    <value>Uninstall</value>
+  </data>
+  <data name="ContentTypeDiagram" xml:space="preserve">
+    <value>Diagram</value>
+  </data>
+  <data name="ContentTypeDrawing" xml:space="preserve">
+    <value>Drawing</value>
+  </data>
+  <data name="ContentTypeMath" xml:space="preserve">
+    <value>Math</value>
+  </data>
+  <data name="ContentTypeRawContent" xml:space="preserve">
+    <value>Raw content</value>
+  </data>
+  <data name="ContentTypeText" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="ContentTypeTextDocument" xml:space="preserve">
+    <value>Text Document</value>
+  </data>
+  <data name="LanguagesManagerDescription" xml:space="preserve">
+    <value>To enable text recognition with diagram, you also need to download assets for the language of your choice.</value>
+  </data>
+  <data name="MessageLanguageRequire" xml:space="preserve">
+    <value>The language {0} is required for this document, tap to install and wait until the installation completes.</value>
+  </data>
+  <data name="MessageLanguageResume" xml:space="preserve">
+    <value>The installation of the language {0} is not yet finished, tap to resume.</value>
+  </data>
+  <data name="MessageLanguageUpdate" xml:space="preserve">
+    <value>You have updates for {0}, tap to install.</value>
+  </data>
+  <data name="MessageSave" xml:space="preserve">
+    <value>You have unsaved changes, are you sure to close this document? Tap Save to save your contents. Tap Don't save to discard changes. Tap Cancel to cancel the closing and continue on your editing.</value>
+  </data>
+  <data name="MyScriptInteractiveInkFile" xml:space="preserve">
+    <value>MyScript Interactive Ink File</value>
+  </data>
+  <data name="MyScriptNeboFile" xml:space="preserve">
+    <value>MyScript Nebo File</value>
+  </data>
+  <data name="SettingsAboutVersion" xml:space="preserve">
+    <value>Version:</value>
+  </data>
+  <data name="SettingsThemeSelectorDark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="SettingsThemeSelectorDefault" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="SettingsThemeSelectorLight" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="TitleAbout" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="TitleBookProperties" xml:space="preserve">
+    <value>Book Properties</value>
+  </data>
+  <data name="TitleDashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="TitleLanguages" xml:space="preserve">
+    <value>Languages</value>
+  </data>
+  <data name="TitleLanguageSelector" xml:space="preserve">
+    <value>Select a language</value>
+  </data>
+  <data name="TitlePageProperties" xml:space="preserve">
+    <value>Page Properties</value>
+  </data>
+  <data name="TitlePopular" xml:space="preserve">
+    <value>Popular</value>
+  </data>
+  <data name="TitleRecent" xml:space="preserve">
+    <value>Recent</value>
+  </data>
+  <data name="TitleSave" xml:space="preserve">
+    <value>Save changes?</value>
+  </data>
+  <data name="TitleSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="TitleTemplates" xml:space="preserve">
+    <value>Templates</value>
+  </data>
+  <data name="TitleTheme" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="TitleWelcome" xml:space="preserve">
+    <value>Welcome</value>
   </data>
 </root>

@@ -1,0 +1,42 @@
+<Page
+    x:Class="MyScript.OpenInk.Main.Views.Settings.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:settings="using:MyScript.OpenInk.Main.Views.Settings.Controls"
+    xmlns:vm="using:MyScript.OpenInk.Main.ViewModels"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{x:Bind ViewModel}">
+    <Page.Resources>
+        <vm:SettingsViewModel x:Name="ViewModel" />
+    </Page.Resources>
+    <SplitView x:Name="SplitView"
+               DisplayMode="Overlay"
+               IsPaneOpen="{x:Bind ViewModel.IsPaneOpen, Mode=TwoWay}"
+               PanePlacement="Right">
+        <SplitView.Pane>
+            <Frame />
+        </SplitView.Pane>
+        <muxc:NavigationView IsBackButtonVisible="Collapsed"
+                             IsSettingsVisible="False"
+                             OverflowLabelMode="NoLabel"
+                             PaneDisplayMode="Top"
+                             BackRequested="{x:Bind ViewModel.InfrastructureServices.NavigationService.GoBack}">
+            <muxc:NavigationView.PaneHeader>
+                <TextBlock Margin="{StaticResource MediumLeftMargin}"
+                           Style="{StaticResource PageTitleTextBlockStyle}"
+                           Text="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=TitleSettings}" />
+            </muxc:NavigationView.PaneHeader>
+            <ScrollViewer HorizontalScrollMode="Disabled">
+                <StackPanel Margin="{StaticResource MediumLeftTopRightMargin}">
+                    <settings:LanguageManager Margin="{StaticResource MediumBottomMargin}" />
+                    <settings:ThemeSelector Margin="{StaticResource MediumBottomMargin}" />
+                    <settings:About Margin="{StaticResource MediumBottomMargin}" />
+                </StackPanel>
+            </ScrollViewer>
+        </muxc:NavigationView>
+    </SplitView>
+</Page>

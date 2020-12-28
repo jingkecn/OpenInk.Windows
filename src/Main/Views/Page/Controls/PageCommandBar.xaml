@@ -1,0 +1,109 @@
+<CommandBar
+    x:Class="MyScript.OpenInk.Main.Views.Page.Controls.PageCommandBar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:enumerations="using:MyScript.InteractiveInk.Enumerations"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <CommandBar.Resources>
+        <StandardUICommand x:Name="CommandCopy"
+                           Command="{x:Bind ViewModel.InteractiveInkCommands.ContentCommands.CommandCopySelection}"
+                           Kind="Copy"
+                           Label="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=CommandCopy}" />
+        <StandardUICommand x:Name="CommandDelete"
+                           Command="{x:Bind ViewModel.InteractiveInkCommands.ContentCommands.CommandDeleteSelection}"
+                           Kind="Delete"
+                           Label="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=CommandDelete}" />
+        <StandardUICommand x:Name="CommandPaste"
+                           Command="{x:Bind ViewModel.InteractiveInkCommands.ContentCommands.CommandPasteSelection}"
+                           Kind="Paste"
+                           Label="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=CommandPaste}" />
+        <StandardUICommand x:Name="CommandRedo"
+                           Command="{x:Bind ViewModel.InteractiveInkCommands.ContentCommands.CommandRedo}"
+                           Kind="Redo"
+                           Label="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=CommandRedo}" />
+        <StandardUICommand x:Name="CommandSave"
+                           Command="{x:Bind ViewModel.InteractiveInkCommands.BookCommands.CommandSave}"
+                           Kind="Save"
+                           Label="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=CommandSave}" />
+        <StandardUICommand x:Name="CommandSaveAs"
+                           Command="{x:Bind ViewModel.InteractiveInkCommands.BookCommands.CommandSave}"
+                           IconSource="{StaticResource SymbolIconSourceSaveLocal}"
+                           Kind="None"
+                           Label="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=CommandSaveAs}" />
+        <StandardUICommand x:Name="CommandTypeset"
+                           Command="{x:Bind ViewModel.InteractiveInkCommands.ContentCommands.CommandTypeset}"
+                           IconSource="{StaticResource FontIconSourceLightBulb}"
+                           Kind="None"
+                           Label="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=CommandTypeset}" />
+        <StandardUICommand x:Name="CommandUndo"
+                           Command="{x:Bind ViewModel.InteractiveInkCommands.ContentCommands.CommandUndo}"
+                           Kind="Undo"
+                           Label="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=CommandUndo}" />
+    </CommandBar.Resources>
+    <AppBarButton Icon="Add"
+                  Label="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=CommandAdd}"
+                  Visibility="{x:Bind ViewModel.Page.IsDocument, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
+        <AppBarButton.Flyout>
+            <MenuFlyout>
+                <MenuFlyoutItem Command="{x:Bind ViewModel.InteractiveInkCommands.ContentCommands.CommandAppend}"
+                                Text="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=ContentTypeDiagram}">
+                    <MenuFlyoutItem.CommandParameter>
+                        <enumerations:ContentType>Diagram</enumerations:ContentType>
+                    </MenuFlyoutItem.CommandParameter>
+                </MenuFlyoutItem>
+                <MenuFlyoutItem Command="{x:Bind ViewModel.InteractiveInkCommands.ContentCommands.CommandAppend}"
+                                Text="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=ContentTypeDrawing}">
+                    <MenuFlyoutItem.CommandParameter>
+                        <enumerations:ContentType>Drawing</enumerations:ContentType>
+                    </MenuFlyoutItem.CommandParameter>
+                </MenuFlyoutItem>
+                <MenuFlyoutItem Command="{x:Bind ViewModel.InteractiveInkCommands.ContentCommands.CommandAppend}"
+                                Text="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=ContentTypeMath}">
+                    <MenuFlyoutItem.CommandParameter>
+                        <enumerations:ContentType>Math</enumerations:ContentType>
+                    </MenuFlyoutItem.CommandParameter>
+                </MenuFlyoutItem>
+                <MenuFlyoutItem Command="{x:Bind ViewModel.InteractiveInkCommands.ContentCommands.CommandAppend}"
+                                Text="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=ContentTypeRawContent}">
+                    <MenuFlyoutItem.CommandParameter>
+                        <enumerations:ContentType>RawContent</enumerations:ContentType>
+                    </MenuFlyoutItem.CommandParameter>
+                    <MenuFlyoutItem.Icon>
+                        <FontIcon Glyph="{StaticResource FontIconDraw}" />
+                    </MenuFlyoutItem.Icon>
+                </MenuFlyoutItem>
+            </MenuFlyout>
+        </AppBarButton.Flyout>
+    </AppBarButton>
+    <AppBarButton Command="{x:Bind CommandDelete}"
+                  CommandParameter="{x:Bind ViewModel.Selection, Mode=OneWay}"
+                  IsEnabled="{x:Bind ViewModel.Selection, Converter={StaticResource EmptyObjectToBoolConverter}, Mode=OneWay}" />
+    <AppBarSeparator />
+    <AppBarButton Command="{x:Bind CommandUndo}"
+                  IsEnabled="{x:Bind ViewModel.CanUndo, Mode=OneWay}" />
+    <AppBarButton Command="{x:Bind CommandRedo}"
+                  IsEnabled="{x:Bind ViewModel.CanRedo, Mode=OneWay}" />
+    <AppBarSeparator />
+    <AppBarButton Command="{x:Bind CommandTypeset}" />
+    <CommandBar.SecondaryCommands>
+        <AppBarButton Command="{x:Bind CommandCopy}"
+                      CommandParameter="{x:Bind ViewModel.Selection, Mode=OneWay}"
+                      IsEnabled="{x:Bind ViewModel.Selection, Converter={StaticResource EmptyObjectToBoolConverter}, Mode=OneWay}" />
+        <AppBarButton Command="{x:Bind CommandPaste}" />
+        <AppBarSeparator />
+        <AppBarButton Command="{x:Bind CommandSave}">
+            <AppBarButton.CommandParameter>
+                <x:Boolean>False</x:Boolean>
+            </AppBarButton.CommandParameter>
+        </AppBarButton>
+        <AppBarButton Command="{x:Bind CommandSaveAs}">
+            <AppBarButton.CommandParameter>
+                <x:Boolean>True</x:Boolean>
+            </AppBarButton.CommandParameter>
+        </AppBarButton>
+    </CommandBar.SecondaryCommands>
+</CommandBar>

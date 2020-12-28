@@ -1,0 +1,35 @@
+<ResourceDictionary
+    x:Class="MyScript.OpenInk.Main.Templates.PageGridViewItemTemplate"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:models="using:MyScript.OpenInk.Core.Models">
+    <DataTemplate x:Key="PageGridViewItemTemplate"
+                  x:DataType="models:IPage">
+        <Grid Margin="{StaticResource SmallLeftTopRightBottomMargin}"
+              ToolTipService.ToolTip="{x:Bind Type, Converter={StaticResource TypeDescriptorConverter}}">
+            <Grid.ContextFlyout>
+                <MenuFlyout>
+                    <MenuFlyoutItem Command="{x:Bind InteractiveInkCommands.PageCommands.CommandDelete}"
+                                    CommandParameter="{x:Bind}"
+                                    Icon="Delete"
+                                    Text="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=CommandDelete}" />
+                </MenuFlyout>
+            </Grid.ContextFlyout>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Viewbox Grid.Row="0"
+                     Margin="{StaticResource SmallLeftTopRightBottomMargin}">
+                <SymbolIcon Symbol="Page2" />
+            </Viewbox>
+            <Grid Grid.Row="1">
+                <TextBlock Margin="{StaticResource SmallLeftRightMargin}"
+                           MaxLines="2"
+                           Style="{ThemeResource CaptionTextBlockStyle}"
+                           Text="{x:Bind Index}"
+                           TextAlignment="Center" />
+            </Grid>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

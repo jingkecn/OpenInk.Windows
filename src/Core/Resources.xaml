@@ -1,0 +1,7 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <ResourceDictionary.MergedDictionaries>
+        <!-- Local -->
+        <ResourceDictionary Source="Infrastructure/Converters/Resources.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

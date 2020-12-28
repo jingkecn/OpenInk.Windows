@@ -1,0 +1,59 @@
+<UserControl
+    x:Class="MyScript.OpenInk.Main.Views.Dashboard.Controls.StartControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <controls:HeaderedContentControl
+        Header="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=TitleWelcome}"
+        Style="{StaticResource SectionContentWithHeaderStyle}">
+        <controls:AdaptiveGridView IsItemClickEnabled="False"
+                                   ItemHeight="{StaticResource XxxLargeSize}"
+                                   SelectionMode="None">
+            <Button Background="Transparent"
+                    Command="{x:Bind ViewModel.CommandCreateBook}">
+                <Grid Margin="{StaticResource SmallLeftTopRightBottomMargin}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Viewbox Grid.Row="0"
+                             Margin="{StaticResource MediumLeftTopRightBottomMargin}">
+                        <SymbolIcon Symbol="Add" />
+                    </Viewbox>
+                    <Grid Grid.Row="1">
+                        <TextBlock Margin="{StaticResource SmallLeftTopRightMargin}"
+                                   MaxLines="2"
+                                   Style="{ThemeResource ContentTextBlockStyle}"
+                                   Text="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=CommandNew}"
+                                   TextAlignment="Center" />
+                    </Grid>
+                </Grid>
+            </Button>
+            <Button Background="Transparent"
+                    Command="{x:Bind ViewModel.CommandOpenBook}">
+                <Grid Margin="{StaticResource SmallLeftTopRightBottomMargin}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Viewbox Grid.Row="0"
+                             Margin="{StaticResource MediumLeftTopRightBottomMargin}">
+                        <SymbolIcon Symbol="OpenLocal" />
+                    </Viewbox>
+                    <Grid Grid.Row="1">
+                        <TextBlock Margin="{StaticResource SmallLeftTopRightMargin}"
+                                   MaxLines="2"
+                                   Style="{ThemeResource ContentTextBlockStyle}"
+                                   Text="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=CommandOpen}"
+                                   TextAlignment="Center" />
+                    </Grid>
+                </Grid>
+            </Button>
+        </controls:AdaptiveGridView>
+    </controls:HeaderedContentControl>
+</UserControl>

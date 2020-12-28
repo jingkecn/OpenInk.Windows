@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>8342fdb4-671c-447c-bf95-5d4e01c5c2ed</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Resources</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\conf\diagram.conf" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\conf\en_US.conf" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\conf\math.conf" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\conf\raw-content.conf" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\languages.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\resources\analyzer\ank-diagram.res" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\resources\analyzer\ank-raw-content.res" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\resources\en_US\en_US-ak-cur.res" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\resources\en_US\en_US-lk-text.res" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\resources\math\math-ak.res" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\resources\math\math-grm-standard.res" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\resources\shape\shk-diagram.res" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\conf\zh_CN.conf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\resources\mul\mul-lk-english_secondary_2.res" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="$(MSBuildThisFileDirectory)Assets\resources\zh_CN\zh_CN-ak-cur.res" />
+    <Resource Include="$(MSBuildThisFileDirectory)Assets\resources\zh_CN\zh_CN-lk-text.res" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\resources\zh_CN\zh_CN-ak-cur.res" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\resources\zh_CN\zh_CN-lk-text.res" />
+  </ItemGroup>
+</Project>

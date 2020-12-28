@@ -1,0 +1,74 @@
+<Page
+    x:Class="MyScript.OpenInk.Main.Views.Book.BookViewPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:book="using:MyScript.OpenInk.Main.Views.Book.Controls"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:vm="using:MyScript.OpenInk.Main.ViewModels"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{x:Bind ViewModel}">
+    <Page.Resources>
+        <vm:BookViewModel x:Name="ViewModel" />
+    </Page.Resources>
+    <muxc:NavigationView IsBackEnabled="{x:Bind ViewModel.CanGoBack, Mode=OneWay}"
+                         OverflowLabelMode="NoLabel"
+                         PaneDisplayMode="Top"
+                         BackRequested="{x:Bind ViewModel.InfrastructureServices.NavigationService.GoBack}">
+        <muxc:NavigationView.AutoSuggestBox>
+            <AutoSuggestBox QueryIcon="Find" />
+        </muxc:NavigationView.AutoSuggestBox>
+        <muxc:NavigationView.PaneFooter>
+            <book:BookCommandBar x:Name="TopCommandBar"
+                                 Background="Transparent"
+                                 DefaultLabelPosition="Right"
+                                 Visibility="Collapsed" />
+        </muxc:NavigationView.PaneFooter>
+        <muxc:NavigationView.PaneHeader>
+            <TextBlock Margin="{StaticResource SmallLeftMargin}"
+                       Style="{ThemeResource PageTitleTextBlockStyle}"
+                       Text="{x:Bind ViewModel.Book.Name, Mode=OneWay}" />
+        </muxc:NavigationView.PaneHeader>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <controls:AdaptiveGridView Grid.Row="0"
+                                       IsItemClickEnabled="True"
+                                       Margin="{StaticResource SmallLeftTopRightMargin}"
+                                       SelectionMode="None"
+                                       ItemClickCommand="{x:Bind ViewModel.InteractiveInkCommands.PageCommands.CommandOpen}"
+                                       ItemHeight="{StaticResource XxxLargeSize}"
+                                       ItemsSource="{x:Bind ViewModel.Pages, Mode=OneWay}"
+                                       ItemTemplate="{StaticResource PageGridViewItemTemplate}" />
+            <book:BookStatusBar Grid.Row="1"
+                                Background="{ThemeResource SystemColorControlAccentBrush}"
+                                Padding="{StaticResource XxSmallLeftTopRightBottomMargin}" />
+            <book:BookCommandBar Grid.Row="2"
+                                 x:Name="BottomCommandBar"
+                                 DefaultLabelPosition="Right" />
+        </Grid>
+        <!--#region Visual States-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource MediumWindowSnapPoint}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!-- See: https://docs.microsoft.com/en-us/windows/uwp/design/layout/screen-sizes-and-breakpoints-for-responsive-design#general-recommendations-->
+                        <Setter Target="TopCommandBar.Visibility" Value="Visible" />
+                        <Setter Target="BottomCommandBar.Visibility" Value="Collapsed" />
+                        <!--TODO: (Small) Use an icon to represent search (don't show a search box).-->
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <!--#endregion-->
+    </muxc:NavigationView>
+</Page>

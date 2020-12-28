@@ -1,0 +1,24 @@
+<UserControl
+    x:Class="MyScript.OpenInk.Main.Views.Settings.Controls.About"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <controls:HeaderedContentControl
+        Header="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=TitleAbout}"
+        Style="{StaticResource SectionContentWithHeaderStyle}">
+        <StackPanel>
+            <TextBlock Style="{ThemeResource ContentTextBlockStyle}"
+                       Text="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=AppDescription}" />
+            <TextBlock Style="{ThemeResource ContentTextBlockStyle}">
+                <Run
+                    Text="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=SettingsAboutVersion}" />
+                <Run FontWeight="Bold" Text="{x:Bind ViewModel.Version}" />
+            </TextBlock>
+        </StackPanel>
+    </controls:HeaderedContentControl>
+</UserControl>
