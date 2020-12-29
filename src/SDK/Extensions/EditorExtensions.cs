@@ -15,6 +15,7 @@ namespace MyScript.InteractiveInk.Extensions
     public static partial class EditorExtensions
     {
         public const GestureSettings DefaultSettings =
+            GestureSettings.ManipulationMultipleFingerPanning |
             GestureSettings.ManipulationScale |
             GestureSettings.ManipulationScaleInertia |
             GestureSettings.ManipulationTranslateInertia |
@@ -254,8 +255,11 @@ namespace MyScript.InteractiveInk.Extensions
         /// </summary>
         /// <param name="source">The source <see cref="Editor" />.</param>
         /// <param name="point">The <see cref="PointerPoint" />.</param>
+        /// <param name="enableFingerInking">Indicates if the pointer input should handle finger inking.</param>
         /// <param name="isEraser">Indicates if the pointer input is <see cref="PointerType.ERASER" />.</param>
-        public static void PointerDown([NotNull] this Editor source, PointerPoint point, bool isEraser = false)
+        public static void PointerDown([NotNull] this Editor source, PointerPoint point,
+            bool enableFingerInking = false,
+            bool isEraser = false)
         {
             if (!point.Properties.IsPrimary)
             {
@@ -266,7 +270,7 @@ namespace MyScript.InteractiveInk.Extensions
             var y = point.Position.Y;
             var timestamp = point.Timestamp.FromMicrosecondsToMilliseconds();
             var pressure = point.Properties.Pressure;
-            var type = point.PointerDevice.PointerDeviceType.ToNative(isEraser);
+            var type = point.PointerDevice.PointerDeviceType.ToNative(enableFingerInking, isEraser);
             var id = point.PointerId;
             source.PointerDown((float)x, (float)y, (long)timestamp, pressure, type, (int)id);
         }
@@ -276,8 +280,11 @@ namespace MyScript.InteractiveInk.Extensions
         /// </summary>
         /// <param name="source">The source <see cref="Editor" />.</param>
         /// <param name="point">The <see cref="PointerPoint" />.</param>
+        /// <param name="enableFingerInking">Indicates if the pointer input should handle finger inking.</param>
         /// <param name="isEraser">Indicates if the pointer input is <see cref="PointerType.ERASER" />.</param>
-        public static void PointerMove([NotNull] this Editor source, PointerPoint point, bool isEraser = false)
+        public static void PointerMove([NotNull] this Editor source, PointerPoint point,
+            bool enableFingerInking = false,
+            bool isEraser = false)
         {
             if (!point.IsInContact || !point.Properties.IsPrimary)
             {
@@ -288,7 +295,7 @@ namespace MyScript.InteractiveInk.Extensions
             var y = point.Position.Y;
             var timestamp = point.Timestamp.FromMicrosecondsToMilliseconds();
             var pressure = point.Properties.Pressure;
-            var type = point.PointerDevice.PointerDeviceType.ToNative(isEraser);
+            var type = point.PointerDevice.PointerDeviceType.ToNative(enableFingerInking, isEraser);
             var id = point.PointerId;
             source.PointerMove((float)x, (float)y, (long)timestamp, pressure, type, (int)id);
         }
@@ -298,8 +305,10 @@ namespace MyScript.InteractiveInk.Extensions
         /// </summary>
         /// <param name="source">The source <see cref="Editor" />.</param>
         /// <param name="point">The <see cref="PointerPoint" />.</param>
+        /// <param name="enableFingerInking">Indicates if the pointer input should handle finger inking.</param>
         /// <param name="isEraser">Indicates if the pointer input is <see cref="PointerType.ERASER" />.</param>
-        public static void PointerUp([NotNull] this Editor source, PointerPoint point, bool isEraser = false)
+        public static void PointerUp([NotNull] this Editor source, PointerPoint point, bool enableFingerInking = false,
+            bool isEraser = false)
         {
             if (!point.Properties.IsPrimary)
             {
@@ -310,7 +319,7 @@ namespace MyScript.InteractiveInk.Extensions
             var y = point.Position.Y;
             var timestamp = point.Timestamp.FromMicrosecondsToMilliseconds();
             var pressure = point.Properties.Pressure;
-            var type = point.PointerDevice.PointerDeviceType.ToNative(isEraser);
+            var type = point.PointerDevice.PointerDeviceType.ToNative(enableFingerInking, isEraser);
             var id = point.PointerId;
             source.PointerUp((float)x, (float)y, (long)timestamp, pressure, type, (int)id);
         }

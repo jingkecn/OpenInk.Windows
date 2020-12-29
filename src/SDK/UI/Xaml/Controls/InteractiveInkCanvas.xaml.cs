@@ -25,6 +25,10 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
             DependencyProperty.Register("InkToolbarTool", typeof(InkToolbarTool), typeof(InteractiveInkCanvas),
                 new PropertyMetadata(default(InkToolbarTool)));
 
+        public static readonly DependencyProperty IsFingerInkingEnabledProperty =
+            DependencyProperty.Register("IsFingerInkingEnabled", typeof(bool), typeof(InteractiveInkCanvas),
+                new PropertyMetadata(default(bool)));
+
         public InteractiveInkCanvas()
         {
             InitializeComponent();
@@ -38,6 +42,12 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
         {
             get => GetValue(EditorProperty) as Editor;
             set => Initialize(value);
+        }
+
+        public bool IsFingerInkingEnabled
+        {
+            get => GetValue(IsFingerInkingEnabledProperty) is bool value && value;
+            set => SetValue(IsFingerInkingEnabledProperty, value);
         }
 
         /// <summary>
@@ -178,7 +188,8 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
 
         private void OnManipulationUpdated(GestureRecognizer sender, ManipulationUpdatedEventArgs args)
         {
-            if (args.PointerDeviceType == PointerDeviceType.Pen || !Editor.IsScrollAllowed())
+            if (args.PointerDeviceType == PointerDeviceType.Pen || !Editor.IsScrollAllowed() ||
+                (IsFingerInkingEnabled && !HasMultiTouches))
             {
                 return;
             }
@@ -194,6 +205,9 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
     /// </summary>
     public sealed partial class InteractiveInkCanvas
     {
+        private bool HasMultiTouches { get; set; }
+        private PointerPoint PrimaryPointerPoint { get; set; }
+
         private void OnPointerPressed(object sender, PointerRoutedEventArgs e)
         {
             if (!(sender is UIElement element))
@@ -203,8 +217,18 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
 
             element.CapturePointer(e.Pointer);
             var point = e.GetCurrentPoint(element);
+            HasMultiTouches = !point.Properties.IsPrimary;
+            PrimaryPointerPoint = point.Properties.IsPrimary ? point : PrimaryPointerPoint;
             GestureRecognizer.ProcessDownEvent(point);
-            Editor?.PointerDown(point, InkToolbarTool == InkToolbarTool.Eraser);
+            if (IsFingerInkingEnabled && HasMultiTouches)
+            {
+                Editor?.PointerCancel(PrimaryPointerPoint);
+            }
+            else
+            {
+                Editor?.PointerDown(point, IsFingerInkingEnabled, InkToolbarTool == InkToolbarTool.Eraser);
+            }
+
             e.Handled = true;
         }
 
@@ -216,9 +240,14 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
             }
 
             var point = e.GetCurrentPoint(element);
+            PrimaryPointerPoint = point.Properties.IsPrimary ? point : PrimaryPointerPoint;
             var points = e.GetIntermediatePoints(element);
             GestureRecognizer.ProcessMoveEvents(points);
-            Editor?.PointerMove(point, InkToolbarTool == InkToolbarTool.Eraser);
+            if (!IsFingerInkingEnabled || !HasMultiTouches)
+            {
+                Editor?.PointerMove(point, IsFingerInkingEnabled, InkToolbarTool == InkToolbarTool.Eraser);
+            }
+
             e.Handled = true;
         }
 
@@ -230,8 +259,13 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
             }
 
             var point = e.GetCurrentPoint(element);
+            PrimaryPointerPoint = point.Properties.IsPrimary ? point : PrimaryPointerPoint;
             GestureRecognizer.ProcessUpEvent(point);
-            Editor?.PointerUp(point, InkToolbarTool == InkToolbarTool.Eraser);
+            if (!IsFingerInkingEnabled || !HasMultiTouches)
+            {
+                Editor?.PointerUp(point, IsFingerInkingEnabled, InkToolbarTool == InkToolbarTool.Eraser);
+            }
+
             element.ReleasePointerCapture(e.Pointer);
             e.Handled = true;
         }
@@ -245,6 +279,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
 
             GestureRecognizer.CompleteGesture();
             var point = e.GetCurrentPoint(element);
+            PrimaryPointerPoint = point.Properties.IsPrimary ? point : PrimaryPointerPoint;
             Editor?.PointerCancel(point);
             element.ReleasePointerCapture(e.Pointer);
             e.Handled = true;
