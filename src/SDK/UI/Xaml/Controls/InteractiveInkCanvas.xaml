@@ -25,6 +25,7 @@
                                      PointerMoved="OnPointerMoved"
                                      PointerPressed="OnPointerPressed"
                                      PointerReleased="OnPointerReleased"
+                                     PointerWheelChanged="OnPointerWheelChanged"
                                      RegionsInvalidated="OnRegionsInvalidated" />
     </Grid>
 </UserControl>
