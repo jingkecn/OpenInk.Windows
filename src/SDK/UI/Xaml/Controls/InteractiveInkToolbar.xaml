@@ -8,9 +8,16 @@
     d:DesignHeight="300"
     d:DesignWidth="400"
     x:Name="UserControl">
+    <UserControl.Resources>
+        <x:String x:Key="FontIconFingerInking">&#xED5F;</x:String>
+    </UserControl.Resources>
     <Grid Background="{x:Bind UserControl.Background, Mode=OneWay}">
         <InkToolbar ActiveToolChanged="OnActiveToolChanged"
                     EraseAllClicked="OnEraseAllClicked"
-                    InkDrawingAttributesChanged="OnInkDrawingAttributesChanged" />
+                    InkDrawingAttributesChanged="OnInkDrawingAttributesChanged">
+            <InkToolbarCustomToggleButton IsChecked="{x:Bind TargetInkCanvas.IsFingerInkingEnabled, Mode=TwoWay}">
+                <FontIcon Glyph="{StaticResource FontIconFingerInking}" />
+            </InkToolbarCustomToggleButton>
+        </InkToolbar>
     </Grid>
 </UserControl>

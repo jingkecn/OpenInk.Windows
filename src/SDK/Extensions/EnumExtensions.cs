@@ -116,13 +116,14 @@ namespace MyScript.InteractiveInk.Extensions
 
     public static partial class EnumExtensions
     {
-        public static PointerType ToNative(this PointerDeviceType source, bool isEraser = false)
+        public static PointerType ToNative(this PointerDeviceType source, bool enableFingerInking = false,
+            bool isEraser = false)
         {
             return isEraser
                 ? PointerType.ERASER
                 : source switch
                 {
-                    PointerDeviceType.Touch => PointerType.TOUCH,
+                    PointerDeviceType.Touch => enableFingerInking ? PointerType.PEN : PointerType.TOUCH,
                     PointerDeviceType.Pen => PointerType.PEN,
                     PointerDeviceType.Mouse => PointerType.TOUCH,
                     _ => throw new ArgumentOutOfRangeException(nameof(source), source, null)
