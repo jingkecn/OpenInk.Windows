@@ -10,6 +10,7 @@
     x:Name="UserControl">
     <UserControl.Resources>
         <x:String x:Key="FontIconFingerInking">&#xED5F;</x:String>
+        <x:String x:Key="FontIconMouse">&#xE962;</x:String>
     </UserControl.Resources>
     <Grid Background="{x:Bind UserControl.Background, Mode=OneWay}">
         <InkToolbar ActiveToolChanged="OnActiveToolChanged"
@@ -17,6 +18,9 @@
                     InkDrawingAttributesChanged="OnInkDrawingAttributesChanged">
             <InkToolbarCustomToggleButton IsChecked="{x:Bind TargetInkCanvas.IsFingerInkingEnabled, Mode=TwoWay}">
                 <FontIcon Glyph="{StaticResource FontIconFingerInking}" />
+            </InkToolbarCustomToggleButton>
+            <InkToolbarCustomToggleButton IsChecked="{x:Bind TargetInkCanvas.IsMouseInkingEnabled, Mode=TwoWay}">
+                <FontIcon Glyph="{StaticResource FontIconMouse}" />
             </InkToolbarCustomToggleButton>
         </InkToolbar>
     </Grid>
