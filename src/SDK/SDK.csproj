@@ -126,6 +126,7 @@
     <Compile Include="Converters\EnumLocalizationConverter.cs" />
     <Compile Include="Enumerations\ContentType.cs" />
     <Compile Include="Enumerations\InkingInput.cs" />
+    <Compile Include="Enumerations\PenBrush.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\ContentBlockExtensions.cs" />
     <Compile Include="Extensions\ContentPackageExtensions.cs" />
@@ -143,6 +144,13 @@
     <Compile Include="UI\Implementations\Canvas.cs" />
     <Compile Include="UI\Implementations\Path.cs" />
     <Compile Include="UI\Implementations\FontMetricsProvider.cs" />
+    <Compile Include="UI\Styles\PenStyle.cs" />
+    <Compile Include="UI\Xaml\Controls\InkToolbar\CalligraphyPen.xaml.cs">
+      <DependentUpon>CalligraphyPen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Xaml\Controls\InkToolbar\CalligraphyPenButton.xaml.cs">
+      <DependentUpon>CalligraphyPenButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Xaml\Controls\InteractiveInkCanvas.xaml.cs">
       <DependentUpon>InteractiveInkCanvas.xaml</DependentUpon>
     </Compile>
@@ -163,6 +171,14 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="UI\Xaml\Controls\InkToolbar\CalligraphyPen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Xaml\Controls\InkToolbar\CalligraphyPenButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Xaml\Controls\InteractiveInkCanvas.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -172,6 +188,7 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
