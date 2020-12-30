@@ -10,8 +10,10 @@ using Windows.UI.Xaml.Input;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using MyScript.IInk;
 using MyScript.InteractiveInk.Annotations;
+using MyScript.InteractiveInk.Enumerations;
 using MyScript.InteractiveInk.Extensions;
 using Canvas = MyScript.InteractiveInk.UI.Implementations.Canvas;
+using Point = MyScript.IInk.Graphics.Point;
 
 namespace MyScript.InteractiveInk.UI.Xaml.Controls
 {
@@ -27,6 +29,10 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
 
         public static readonly DependencyProperty IsFingerInkingEnabledProperty =
             DependencyProperty.Register("IsFingerInkingEnabled", typeof(bool), typeof(InteractiveInkCanvas),
+                new PropertyMetadata(default(bool)));
+
+        public static readonly DependencyProperty IsMouseInkingEnabledProperty =
+            DependencyProperty.Register("IsMouseInkingEnabled", typeof(bool), typeof(InteractiveInkCanvas),
                 new PropertyMetadata(default(bool)));
 
         public InteractiveInkCanvas()
@@ -48,6 +54,12 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
         {
             get => GetValue(IsFingerInkingEnabledProperty) is bool value && value;
             set => SetValue(IsFingerInkingEnabledProperty, value);
+        }
+
+        public bool IsMouseInkingEnabled
+        {
+            get => GetValue(IsMouseInkingEnabledProperty) is bool value && value;
+            set => SetValue(IsMouseInkingEnabledProperty, value);
         }
 
         /// <summary>
@@ -160,7 +172,8 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
     {
         private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            if (!(sender is UIElement element) || e.PointerDeviceType == PointerDeviceType.Pen)
+            if (!(sender is UIElement element) || e.PointerDeviceType == PointerDeviceType.Pen ||
+                IsFingerInkingEnabled || IsMouseInkingEnabled)
             {
                 return;
             }
@@ -189,7 +202,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
         private void OnManipulationUpdated(GestureRecognizer sender, ManipulationUpdatedEventArgs args)
         {
             if (args.PointerDeviceType == PointerDeviceType.Pen || !Editor.IsScrollAllowed() ||
-                (IsFingerInkingEnabled && !HasMultiTouches))
+                (IsFingerInkingEnabled && !HasMultiTouches) || (!IsFingerInkingEnabled && IsMouseInkingEnabled))
             {
                 return;
             }
@@ -206,6 +219,18 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
     public sealed partial class InteractiveInkCanvas
     {
         private bool HasMultiTouches { get; set; }
+
+        private InkingInput InkingInput
+        {
+            get
+            {
+                var input = InkingInput.Pen;
+                input |= IsFingerInkingEnabled ? InkingInput.Touch : input;
+                input |= IsMouseInkingEnabled ? InkingInput.Mouse : input;
+                return input;
+            }
+        }
+
         private PointerPoint PrimaryPointerPoint { get; set; }
 
         private void OnPointerPressed(object sender, PointerRoutedEventArgs e)
@@ -226,7 +251,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
             }
             else
             {
-                Editor?.PointerDown(point, IsFingerInkingEnabled, InkToolbarTool == InkToolbarTool.Eraser);
+                Editor?.PointerDown(point, InkingInput, InkToolbarTool == InkToolbarTool.Eraser);
             }
 
             e.Handled = true;
@@ -245,7 +270,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
             GestureRecognizer.ProcessMoveEvents(points);
             if (!IsFingerInkingEnabled || !HasMultiTouches)
             {
-                Editor?.PointerMove(point, IsFingerInkingEnabled, InkToolbarTool == InkToolbarTool.Eraser);
+                Editor?.PointerMove(point, InkingInput, InkToolbarTool == InkToolbarTool.Eraser);
             }
 
             e.Handled = true;
@@ -263,7 +288,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
             GestureRecognizer.ProcessUpEvent(point);
             if (!IsFingerInkingEnabled || !HasMultiTouches)
             {
-                Editor?.PointerUp(point, IsFingerInkingEnabled, InkToolbarTool == InkToolbarTool.Eraser);
+                Editor?.PointerUp(point, InkingInput, InkToolbarTool == InkToolbarTool.Eraser);
             }
 
             element.ReleasePointerCapture(e.Pointer);
@@ -282,6 +307,19 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
             PrimaryPointerPoint = point.Properties.IsPrimary ? point : PrimaryPointerPoint;
             Editor?.PointerCancel(point);
             element.ReleasePointerCapture(e.Pointer);
+            e.Handled = true;
+        }
+
+        private void OnPointerWheelChanged(object sender, PointerRoutedEventArgs e)
+        {
+            if (!(sender is UIElement element))
+            {
+                return;
+            }
+
+            var point = e.GetCurrentPoint(element);
+            Editor?.Renderer?.Scroll(new Point(0, point.Properties.MouseWheelDelta),
+                offset => Editor?.ClampViewOffset(offset));
             e.Handled = true;
         }
     }
