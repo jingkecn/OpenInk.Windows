@@ -6,6 +6,7 @@ namespace MyScript.OpenInk.Core.Models
     {
         int Index { get; set; }
         bool IsDocument { get; }
+        bool IsViewScaleEnabled { get; }
         ContentType Type { get; set; }
     }
 }

@@ -40,6 +40,7 @@ namespace MyScript.OpenInk.Main.Infrastructure.Services
                 infrastructures.ContextService.Initialize(result.Id, view.IsMain, view.Dispatcher);
                 infrastructures.NavigationService.Initialize(frame);
                 infrastructures.NavigationService.Navigate(page, parameter, info);
+                infrastructures.ThemeService.CommandApplyTheme.Execute(infrastructures.ThemeService.Theme);
                 Window.Current.Content = frame;
                 Window.Current.Activate();
             });

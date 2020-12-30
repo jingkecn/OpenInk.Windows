@@ -14,4 +14,9 @@ namespace MyScript.OpenInk.Core.Commands
         ICommand CommandGoBack { get; }
         ICommand CommandGoForward { get; }
     }
+
+    public partial interface IPageCommands
+    {
+        ICommand CommandResetView { get; }
+    }
 }

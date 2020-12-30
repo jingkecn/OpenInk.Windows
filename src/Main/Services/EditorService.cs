@@ -16,6 +16,7 @@ namespace MyScript.OpenInk.Main.Services
     public partial class EditorService
     {
         private static IEngineService EngineService => ServiceLocator.Current.Get<IEngineService>();
+        public ContentType ContentType => ContentPart is { } part ? part.Type.ToPlatformContentType() : default;
         public ContentPart ContentPart => Editor.Part;
     }
 
@@ -66,6 +67,22 @@ namespace MyScript.OpenInk.Main.Services
         public event TypedEventHandler<Editor, Tuple<ContentBlock, string>> Error;
         public event TypedEventHandler<Editor, ContentPart> PartChanged;
         public event TypedEventHandler<Editor, IEnumerable<ContentBlock>> SelectionChanged;
+
+        public void ResetView()
+        {
+            if (!(Editor is { } editor))
+            {
+                throw new InvalidOperationException("The editor is not Initialized");
+            }
+
+            if (!(editor.Renderer is { } renderer))
+            {
+                return;
+            }
+
+            renderer.ResetViewOffset();
+            renderer.ResetViewScale();
+        }
 
         public void Typeset()
         {
