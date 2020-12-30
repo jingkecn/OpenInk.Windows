@@ -20,12 +20,16 @@ namespace MyScript.OpenInk.Main.Commands
         private ICommand _commandGoForward;
         private ICommand _commandOpen;
         private ICommand _commandRemove;
+        private ICommand _commandResetView;
 
         public static IInfrastructureServices InfrastructureServices =>
             ServiceLocator.Current.Get<IInfrastructureServices>();
 
         public static IInteractiveInkServices InteractiveInkServices =>
             ServiceLocator.Current.Get<IInteractiveInkServices>();
+
+        public ICommand CommandResetView => _commandResetView ??=
+            new RelayCommand(_ => InteractiveInkServices.EditorService.ResetView());
 
         public ICommand CommandGoBack =>
             _commandGoBack ??= new RelayCommand(_ => InteractiveInkServices.EditorService.GoBack());

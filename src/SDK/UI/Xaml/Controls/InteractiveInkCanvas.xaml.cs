@@ -35,6 +35,14 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
             DependencyProperty.Register("IsMouseInkingEnabled", typeof(bool), typeof(InteractiveInkCanvas),
                 new PropertyMetadata(default(bool)));
 
+        public static readonly DependencyProperty MaxZoomFactorProperty =
+            DependencyProperty.Register("MaxZoomFactor", typeof(double), typeof(InteractiveInkCanvas),
+                new PropertyMetadata(double.MaxValue));
+
+        public static readonly DependencyProperty MinZoomFactorProperty =
+            DependencyProperty.Register("MinZoomFactor", typeof(double), typeof(InteractiveInkCanvas),
+                new PropertyMetadata(default(double)));
+
         public InteractiveInkCanvas()
         {
             InitializeComponent();
@@ -71,6 +79,18 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
                 ? (InkToolbarTool)GetValue(InkToolbarToolProperty)
                 : default;
             set => SetValue(InkToolbarToolProperty, value);
+        }
+
+        public double MaxZoomFactor
+        {
+            get => (double)GetValue(MaxZoomFactorProperty);
+            set => SetValue(MaxZoomFactorProperty, value);
+        }
+
+        public double MinZoomFactor
+        {
+            get => (double)GetValue(MinZoomFactorProperty);
+            set => SetValue(MinZoomFactorProperty, value);
         }
 
         /// <summary>
@@ -207,9 +227,10 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
                 return;
             }
 
+
             Debug.WriteLine($"{nameof(InteractiveInkCanvas)}.{nameof(OnManipulationUpdated)}");
             Renderer?.ChangeViewAt(args.Position.ToNative(), args.Delta.Translation.ToNative(), args.Delta.Scale,
-                offset => Editor?.ClampViewOffset(offset));
+                (float)MaxZoomFactor, (float)MinZoomFactor, offset => Editor?.ClampViewOffset(offset));
         }
     }
 
@@ -318,8 +339,11 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
             }
 
             var point = e.GetCurrentPoint(element);
-            Editor?.Renderer?.Scroll(new Point(0, point.Properties.MouseWheelDelta),
-                offset => Editor?.ClampViewOffset(offset));
+            var delta = point.Properties.MouseWheelDelta;
+            var isHorizontal = point.Properties.IsHorizontalMouseWheel;
+            var deltaX = isHorizontal ? delta : default;
+            var deltaY = isHorizontal ? default : delta;
+            Editor?.Renderer?.Scroll(new Point(deltaX, deltaY), offset => Editor?.ClampViewOffset(offset));
             e.Handled = true;
         }
     }
@@ -368,8 +392,30 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
 
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            Editor?.SetViewSize((int)e.NewSize.Width, (int)e.NewSize.Height);
-            Invalidate(Renderer);
+            if (!(Editor is { } editor))
+            {
+                return;
+            }
+
+            editor.SetViewSize((int)e.NewSize.Width, (int)e.NewSize.Height);
+            if (!(editor.Renderer is { } renderer))
+            {
+                return;
+            }
+
+            renderer.ResetViewScale();
+            if (!(editor.Part is { } part))
+            {
+                return;
+            }
+
+            var type = part.Type.ToPlatformContentType();
+            if (type == ContentType.Text || type == ContentType.TextDocument)
+            {
+                return;
+            }
+
+            renderer.ResetViewOffset();
         }
 
         private void OnUnloaded(object sender, RoutedEventArgs _)

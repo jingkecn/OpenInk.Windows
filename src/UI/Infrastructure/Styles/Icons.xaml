@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls">
     <!-- Glyphs -->
+    <x:String x:Key="FontIconChromeRestore">&#xE923;</x:String>
     <x:String x:Key="FontIconDictionary">&#xE82D;</x:String>
     <x:String x:Key="FontIconDraw">&#xEC87;</x:String>
     <x:String x:Key="FontIconLightBulb">&#xEA80;</x:String>
