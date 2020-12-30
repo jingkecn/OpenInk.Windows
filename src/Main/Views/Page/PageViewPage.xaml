@@ -113,6 +113,22 @@
                 </iink:InteractiveInkCanvas>
                 <toolkit:InAppNotification x:Name="InAppNotification"
                                            StackMode="Replace" />
+                <Button Background="{ThemeResource SystemControlBackgroundAltMediumLowBrush}"
+                        Command="{x:Bind ViewModel.InteractiveInkCommands.PageCommands.CommandResetView}"
+                        HorizontalAlignment="Right" VerticalAlignment="Top"
+                        Margin="{StaticResource XxSmallLeftTopRightBottomMargin}"
+                        Width="{StaticResource LargeSize}" Height="{StaticResource LargeSize}"
+                        Visibility="{x:Bind ViewModel.Page.IsViewScaleEnabled, Converter={StaticResource BoolNegationToVisibilityConverter}}">
+                    <SymbolIcon Symbol="Upload" />
+                </Button>
+                <Button Background="{ThemeResource SystemControlBackgroundAltMediumLowBrush}"
+                        Command="{x:Bind ViewModel.InteractiveInkCommands.PageCommands.CommandResetView}"
+                        HorizontalAlignment="Right" VerticalAlignment="Top"
+                        Margin="{StaticResource XxSmallLeftTopRightBottomMargin}"
+                        Width="{StaticResource LargeSize}" Height="{StaticResource LargeSize}"
+                        Visibility="{x:Bind ViewModel.Page.IsViewScaleEnabled, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <FontIcon Glyph="{StaticResource FontIconChromeRestore}" />
+                </Button>
             </Grid>
             <page:PageStatusBar Grid.Row="1"
                                 Background="{ThemeResource SystemColorControlAccentBrush}"
