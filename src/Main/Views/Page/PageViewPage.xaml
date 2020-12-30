@@ -48,7 +48,9 @@
                 <iink:InteractiveInkCanvas x:Name="InteractiveInkCanvas"
                                            Background="White"
                                            Editor="{x:Bind ViewModel.Editor, Mode=OneWay}"
-                                           Holding="OnHolding">
+                                           Holding="OnHolding"
+                                           MaxZoomFactor="3"
+                                           MinZoomFactor="0.33">
                     <iink:InteractiveInkCanvas.ContextFlyout>
                         <MenuFlyout>
                             <MenuFlyoutSubItem Icon="Add"
