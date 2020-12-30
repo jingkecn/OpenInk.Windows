@@ -339,8 +339,11 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
             }
 
             var point = e.GetCurrentPoint(element);
-            Editor?.Renderer?.Scroll(new Point(0, point.Properties.MouseWheelDelta),
-                offset => Editor?.ClampViewOffset(offset));
+            var delta = point.Properties.MouseWheelDelta;
+            var isHorizontal = point.Properties.IsHorizontalMouseWheel;
+            var deltaX = isHorizontal ? delta : default;
+            var deltaY = isHorizontal ? default : delta;
+            Editor?.Renderer?.Scroll(new Point(deltaX, deltaY), offset => Editor?.ClampViewOffset(offset));
             e.Handled = true;
         }
     }
