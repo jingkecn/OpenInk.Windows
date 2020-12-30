@@ -1,8 +1,11 @@
+using System;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using MyScript.IInk;
 using MyScript.InteractiveInk.Annotations;
-using MyScript.InteractiveInk.Extensions;
+using MyScript.InteractiveInk.Enumerations;
+using MyScript.InteractiveInk.UI.Styles;
 
 namespace MyScript.InteractiveInk.UI.Xaml.Controls
 {
@@ -39,32 +42,80 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
 
     public sealed partial class InteractiveInkToolbar
     {
-        private void OnActiveToolChanged(InkToolbar sender, object args)
+        private PenStyle PenStyle { get; set; } = new() {Brush = PenBrush.FeltPen, Color = Colors.Black};
+
+        private void OnActiveToolChanged(Windows.UI.Xaml.Controls.InkToolbar sender, object args)
         {
-            if (TargetInkCanvas == null)
+            if (!(TargetInkCanvas is { } canvas))
             {
                 return;
             }
 
-            TargetInkCanvas.InkToolbarTool = sender.ActiveTool.ToolKind;
+            var tool = sender.ActiveTool.ToolKind;
+            canvas.InkToolbarTool = tool;
+            if (!(Editor is { } editor))
+            {
+                return;
+            }
+
+            var style = PenStyle;
+            style.Brush = tool switch
+            {
+                InkToolbarTool.BallpointPen => PenBrush.FeltPen,
+                InkToolbarTool.Pencil => PenBrush.FeltPen,
+                InkToolbarTool.Highlighter => PenBrush.Polyline,
+                InkToolbarTool.Eraser => style.Brush,
+                InkToolbarTool.CustomPen => style.Brush,
+                InkToolbarTool.CustomTool => style.Brush,
+                _ => throw new ArgumentOutOfRangeException()
+            };
+            style.ApplyTo(editor);
+            PenStyle = style;
         }
 
-        private void OnEraseAllClicked(InkToolbar sender, object args)
+        private void OnEraseAllClicked(Windows.UI.Xaml.Controls.InkToolbar sender, object args)
         {
             Editor?.Clear();
         }
 
-        private void OnInkDrawingAttributesChanged(InkToolbar sender, object args)
+        private void OnInkDrawingAttributesChanged(Windows.UI.Xaml.Controls.InkToolbar sender, object args)
         {
-            if (Editor == null)
+            if (!(Editor is { } editor))
             {
                 return;
             }
 
             var attributes = sender.InkDrawingAttributes;
-            var color = attributes.Color.ToNative().ToHex();
-            var size = attributes.Size.Width / 10;
-            Editor.PenStyle = $"color: {color}; -myscript-pen-width: {size}";
+            var style = PenStyle;
+            var tool = sender.ActiveTool.ToolKind;
+            var color = attributes.Color;
+            color.A = tool switch
+            {
+                InkToolbarTool.BallpointPen => color.A,
+                InkToolbarTool.Pencil => Convert.ToByte(144),
+                InkToolbarTool.Highlighter => Convert.ToByte(128),
+                InkToolbarTool.Eraser => color.A,
+                InkToolbarTool.CustomPen => color.A,
+                InkToolbarTool.CustomTool => color.A,
+                _ => throw new ArgumentOutOfRangeException()
+            };
+            style.Color = color;
+            style.Size = attributes.Size;
+            style.ApplyTo(editor);
+            PenStyle = style;
+        }
+
+        private void OnCalligraphyPenChecked(object sender, RoutedEventArgs e)
+        {
+            if (!(Editor is { } editor))
+            {
+                return;
+            }
+
+            var style = PenStyle;
+            style.Brush = PenBrush.FountainPen;
+            style.ApplyTo(editor);
+            PenStyle = style;
         }
     }
 }
