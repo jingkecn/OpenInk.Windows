@@ -46,6 +46,18 @@ namespace MyScript.InteractiveInk.Extensions
             source.RenderTarget?.Invalidate(source, LayerType.LayerType_ALL);
         }
 
+        public static void ResetViewOffset([NotNull] this Renderer source)
+        {
+            source.ScrollTo(new Point(0, 0));
+            source.RenderTarget?.Invalidate(source, LayerType.LayerType_ALL);
+        }
+
+        public static void ResetViewScale([NotNull] this Renderer source)
+        {
+            source.ViewScale = 1;
+            source.RenderTarget?.Invalidate(source, LayerType.LayerType_ALL);
+        }
+
         public static void Scroll([NotNull] this Renderer source, Point translation,
             [CanBeNull] Action<Point> clamp = null)
         {

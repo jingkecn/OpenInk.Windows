@@ -368,8 +368,30 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
 
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            Editor?.SetViewSize((int)e.NewSize.Width, (int)e.NewSize.Height);
-            Invalidate(Renderer);
+            if (!(Editor is { } editor))
+            {
+                return;
+            }
+
+            editor.SetViewSize((int)e.NewSize.Width, (int)e.NewSize.Height);
+            if (!(editor.Renderer is { } renderer))
+            {
+                return;
+            }
+
+            renderer.ResetViewScale();
+            if (!(editor.Part is { } part))
+            {
+                return;
+            }
+
+            var type = part.Type.ToPlatformContentType();
+            if (type == ContentType.Text || type == ContentType.TextDocument)
+            {
+                return;
+            }
+
+            renderer.ResetViewOffset();
         }
 
         private void OnUnloaded(object sender, RoutedEventArgs _)
