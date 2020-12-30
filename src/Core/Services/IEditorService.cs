@@ -64,6 +64,7 @@ namespace MyScript.OpenInk.Core.Services
 
     public partial interface IEditorService
     {
+        void ResetView();
         void Typeset();
     }
 

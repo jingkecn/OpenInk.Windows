@@ -39,10 +39,27 @@ namespace MyScript.InteractiveInk.Extensions
     public static partial class RendererExtensions
     {
         public static void ChangeViewAt([NotNull] this Renderer source, Point position, Point translation, float scale,
-            [CanBeNull] Action<Point> clamp = null)
+            float maxScale = float.MaxValue, float minScale = float.Epsilon, [CanBeNull] Action<Point> clamp = null)
         {
             source.Scroll(translation, clamp);
-            source.ZoomAt(position, scale);
+            var scalePreview = source.ViewScale * scale;
+            if (scalePreview >= minScale && scalePreview <= maxScale)
+            {
+                source.ZoomAt(position, scale);
+            }
+
+            source.RenderTarget?.Invalidate(source, LayerType.LayerType_ALL);
+        }
+
+        public static void ResetViewOffset([NotNull] this Renderer source)
+        {
+            source.ScrollTo(new Point(0, 0));
+            source.RenderTarget?.Invalidate(source, LayerType.LayerType_ALL);
+        }
+
+        public static void ResetViewScale([NotNull] this Renderer source)
+        {
+            source.ViewScale = 1;
             source.RenderTarget?.Invalidate(source, LayerType.LayerType_ALL);
         }
 
