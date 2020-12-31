@@ -34,7 +34,7 @@ namespace MyScript.OpenInk.Main.Services
             }
 
             // Unlock file handle.
-            var token = package.GetValue(ParameterKeys.ContentPackageMetadataTargetFileToken, string.Empty);
+            var token = package.GetValue(MetadataKeys.ContentPackageMetadataTargetFileToken, string.Empty);
             if (!SafeFileHandles.TryGetValue(token, out var handle))
             {
                 return;
@@ -127,7 +127,7 @@ namespace MyScript.OpenInk.Main.Services
             ContentPackage = package;
             // Lock file handle
             file = await GetTargetFileAsync();
-            var token = ContentPackage.GetValue(ParameterKeys.ContentPackageMetadataTargetFileToken, string.Empty);
+            var token = ContentPackage.GetValue(MetadataKeys.ContentPackageMetadataTargetFileToken, string.Empty);
             if (SafeFileHandles.TryGetValue(token, out var handle))
             {
                 handle.Close();
@@ -159,7 +159,7 @@ namespace MyScript.OpenInk.Main.Services
                 throw new InvalidOperationException("The package is not initialized.");
             }
 
-            var token = package.GetValue(ParameterKeys.ContentPackageMetadataTargetFileToken, string.Empty);
+            var token = package.GetValue(MetadataKeys.ContentPackageMetadataTargetFileToken, string.Empty);
             if (SafeFileHandles.TryGetValue(token, out var handle))
             {
                 handle.Close();
@@ -217,15 +217,15 @@ namespace MyScript.OpenInk.Main.Services
 
             var engine = Engine.Create((byte[])(Array)certificate);
             var configuration = engine.Configuration;
-            configuration.SetString(ParameterKeys.EngineConfigurationContentPackageTempFolder,
-                ApplicationData.Current.TemporaryFolder.Path);
-            configuration.SetStringArray(ParameterKeys.EngineConfigurationManagerSearchPath,
+            configuration.SetStringArray(ConfigurationKeys.ConfigurationManagerSearchPath,
                 new[] {Path.Combine(ApplicationData.Current.LocalFolder.Path, "Assets", "conf")});
+            configuration.SetString(ConfigurationKeys.ContentPackageTempFolder,
+                ApplicationData.Current.TemporaryFolder.Path);
 #if DEBUG
-            configuration.SetBoolean(ParameterKeys.EngineConfigurationRendererDebugDrawArcOutlines, true);
-            configuration.SetBoolean(ParameterKeys.EngineConfigurationRendererDebugDrawObjectBoxes, true);
+            configuration.SetBoolean(ConfigurationKeys.RendererDebugDrawArcOutlines, true);
+            configuration.SetBoolean(ConfigurationKeys.RendererDebugDrawObjectBoxes, true);
             // TODO: fix crash when typesetting with text boxes enabled.
-            //configuration.SetBoolean(ParameterKeys.EngineConfigurationRendererDebugDrawTextBoxes, true);
+            //configuration.SetBoolean(ConfigurationKeys.RendererDebugDrawTextBoxes, true);
 #endif
             Engine = engine;
             IsInitialized = true;
@@ -240,7 +240,7 @@ namespace MyScript.OpenInk.Main.Services
 
             Debug.WriteLine($"{nameof(IEngineService)}.{nameof(InitializeAsync)}({language.Id})");
             var configuration = engine.Configuration;
-            configuration.SetString(ParameterKeys.EngineConfigurationLanguageIdentifier, language.Tag);
+            configuration.SetString(ConfigurationKeys.Language, language.Tag);
             await Task.CompletedTask;
         }
 

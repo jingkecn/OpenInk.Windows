@@ -92,7 +92,7 @@ namespace MyScript.InteractiveInk.Extensions
         [CanBeNull]
         public static async Task<StorageFile> GetTargetFileAsync([NotNull] this ContentPackage source)
         {
-            var token = source.GetValue(ParameterKeys.ContentPackageMetadataTargetFileToken, default(string));
+            var token = source.GetValue(MetadataKeys.ContentPackageMetadataTargetFileToken, default(string));
             Debug.WriteLine($"{nameof(ContentPackage)}.{nameof(GetTargetFileAsync)}: {token}");
             if (string.IsNullOrEmpty(token))
             {
@@ -129,7 +129,7 @@ namespace MyScript.InteractiveInk.Extensions
         {
             var token = StorageApplicationPermissions.FutureAccessList.Add(file);
             Debug.WriteLine($"{nameof(ContentPackage)}.{nameof(SaveAsync)}: {token}");
-            source.SetValue(ParameterKeys.ContentPackageMetadataTargetFileToken, token);
+            source.SetValue(MetadataKeys.ContentPackageMetadataTargetFileToken, token);
             var tempPath = Path.Combine(ApplicationData.Current.LocalCacheFolder.Path, file.Name);
             if (!source.Save(tempPath))
             {
