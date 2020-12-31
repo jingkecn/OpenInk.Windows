@@ -29,7 +29,7 @@ namespace MyScript.OpenInk.Main.Extensions
                 Pages = source.GetParts().Select(part => part.ToPlatform())
             };
             var configuration = InteractiveInkServices.EngineService.Engine.Configuration;
-            var identifier = configuration.GetString(ParameterKeys.EngineConfigurationLanguageIdentifier);
+            var identifier = configuration.GetString(ConfigurationKeys.Language);
             result.Language = InteractiveInkServices.LanguageService.Languages.Single(x => x.Tag == identifier);
             if (!(await source.GetTargetFileAsync() is { } file))
             {

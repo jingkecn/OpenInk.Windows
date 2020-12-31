@@ -121,8 +121,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Attributes\LocalizedDisplayNameAttribute.cs" />
+    <Compile Include="Constants\ConfigurationKeys.cs" />
     <Compile Include="Constants\FileTypes.cs" />
-    <Compile Include="Constants\ParameterKeys.cs" />
+    <Compile Include="Constants\MetadataKeys.cs" />
+    <Compile Include="Constants\StyleKeys.cs" />
     <Compile Include="Converters\EnumLocalizationConverter.cs" />
     <Compile Include="Enumerations\ContentType.cs" />
     <Compile Include="Enumerations\InkingInput.cs" />

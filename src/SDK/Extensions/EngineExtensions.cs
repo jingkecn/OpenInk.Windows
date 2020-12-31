@@ -18,17 +18,17 @@ namespace MyScript.InteractiveInk.Extensions
             Debug.WriteLine($"{nameof(EngineExtensions)}.{nameof(Open)}({path}):");
             var configuration = source.Configuration;
             Debug.WriteLine(
-                $"\tengine.language: {configuration.GetString(ParameterKeys.EngineConfigurationLanguageIdentifier)}");
-            configuration.SetBoolean(ParameterKeys.EngineConfigurationContentPackageMetadataFullAccess, true);
+                $"\tengine.language: {configuration.GetString(ConfigurationKeys.Language)}");
+            configuration.SetBoolean(ConfigurationKeys.ContentPackageMetadataFullAccess, true);
             var package = source.OpenPackage(path, PackageOpenOption.CREATE);
-            var language = package.GetValue(ParameterKeys.ContentPackageMetadataLanguageIdentifier, string.Empty);
+            var language = package.GetValue(MetadataKeys.ContentPackageMetadataLanguageIdentifier, string.Empty);
             Debug.WriteLine($"\tpackage.language: {language}");
             if (!string.IsNullOrEmpty(language))
             {
-                configuration.SetString(ParameterKeys.EngineConfigurationLanguageIdentifier, language);
+                configuration.SetString(ConfigurationKeys.Language, language);
             }
 
-            configuration.SetBoolean(ParameterKeys.EngineConfigurationContentPackageMetadataFullAccess, false);
+            configuration.SetBoolean(ConfigurationKeys.ContentPackageMetadataFullAccess, false);
             return package;
         }
 
@@ -44,7 +44,7 @@ namespace MyScript.InteractiveInk.Extensions
             // ReSharper disable once MethodHasAsyncOverload
             var package = source.Open(temp.Path);
             // Updates file access token.
-            package.SetValue(ParameterKeys.ContentPackageMetadataTargetFileToken, token);
+            package.SetValue(MetadataKeys.ContentPackageMetadataTargetFileToken, token);
             return package;
         }
 

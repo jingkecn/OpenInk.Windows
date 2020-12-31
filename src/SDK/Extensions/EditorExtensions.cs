@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,10 +9,30 @@ using Windows.Storage.Pickers;
 using Windows.UI.Input;
 using MyScript.IInk;
 using MyScript.InteractiveInk.Annotations;
+using MyScript.InteractiveInk.Constants;
 using MyScript.InteractiveInk.Enumerations;
+using MyScript.InteractiveInk.UI.Styles;
 
 namespace MyScript.InteractiveInk.Extensions
 {
+    public static partial class EditorExtensions
+    {
+        public static void Apply([NotNull] this Editor source, PenStyle style)
+        {
+            Debug.WriteLine($"{nameof(Editor)}.{nameof(Apply)}:");
+            if (!(source.Renderer is { } renderer))
+            {
+                return;
+            }
+
+            source.PenStyle =
+                $"{StyleKeys.Color}: {style.Color.ToNative().ToHex()}; " +
+                $"{StyleKeys.MyScriptPenBrush}: {style.Brush}; " +
+                $"{StyleKeys.MyScriptPenWidth}: {style.Size.Width.FromPixelToMillimeter(renderer.DpiX)}";
+            Debug.WriteLine($"\t{nameof(source.PenStyle)}: {source.PenStyle}");
+        }
+    }
+
     public static partial class EditorExtensions
     {
         public const GestureSettings DefaultSettings =
