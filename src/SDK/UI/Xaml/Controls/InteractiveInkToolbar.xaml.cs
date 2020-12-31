@@ -111,7 +111,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
             }
 
             var style = PenStyle;
-            style.Brush = PenBrush.FountainPen;
+            style.Brush = PenBrush.CalligraphicBrush;
             editor.Apply(PenStyle = style);
         }
     }
