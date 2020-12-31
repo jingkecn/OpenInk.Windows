@@ -17,7 +17,9 @@
         <InkToolbar ActiveToolChanged="OnActiveToolChanged"
                     EraseAllClicked="OnEraseAllClicked"
                     InkDrawingAttributesChanged="OnInkDrawingAttributesChanged">
-            <toolbar:CalligraphyPenButton Checked="OnCalligraphyPenChecked" />
+            <toolbar:CalligraphyPenButton MaxStrokeWidth="24"
+                                          SelectedStrokeWidth="2"
+                                          Checked="OnCalligraphyPenChecked" />
             <InkToolbarCustomToggleButton IsChecked="{x:Bind TargetInkCanvas.IsFingerInkingEnabled, Mode=TwoWay}">
                 <FontIcon Glyph="{StaticResource FontIconFingerInking}" />
             </InkToolbarCustomToggleButton>

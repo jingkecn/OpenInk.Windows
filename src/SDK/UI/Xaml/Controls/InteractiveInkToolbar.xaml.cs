@@ -1,10 +1,10 @@
 using System;
-using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using MyScript.IInk;
 using MyScript.InteractiveInk.Annotations;
 using MyScript.InteractiveInk.Enumerations;
+using MyScript.InteractiveInk.Extensions;
 using MyScript.InteractiveInk.UI.Styles;
 
 namespace MyScript.InteractiveInk.UI.Xaml.Controls
@@ -42,7 +42,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
 
     public sealed partial class InteractiveInkToolbar
     {
-        private PenStyle PenStyle { get; set; } = new() {Brush = PenBrush.FeltPen, Color = Colors.Black};
+        private PenStyle PenStyle { get; set; } = new() {Brush = PenBrush.FeltPen, Color = default};
 
         private void OnActiveToolChanged(Windows.UI.Xaml.Controls.InkToolbar sender, object args)
         {
@@ -69,8 +69,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
                 InkToolbarTool.CustomTool => style.Brush,
                 _ => throw new ArgumentOutOfRangeException()
             };
-            style.ApplyTo(editor);
-            PenStyle = style;
+            editor.Apply(PenStyle = style);
         }
 
         private void OnEraseAllClicked(Windows.UI.Xaml.Controls.InkToolbar sender, object args)
@@ -101,8 +100,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
             };
             style.Color = color;
             style.Size = attributes.Size;
-            style.ApplyTo(editor);
-            PenStyle = style;
+            editor.Apply(PenStyle = style);
         }
 
         private void OnCalligraphyPenChecked(object sender, RoutedEventArgs e)
@@ -113,9 +111,8 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
             }
 
             var style = PenStyle;
-            style.Brush = PenBrush.FountainPen;
-            style.ApplyTo(editor);
-            PenStyle = style;
+            style.Brush = PenBrush.CalligraphicBrush;
+            editor.Apply(PenStyle = style);
         }
     }
 }
