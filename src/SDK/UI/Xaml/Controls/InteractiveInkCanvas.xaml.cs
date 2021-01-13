@@ -116,7 +116,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
         private bool _isHorizontalScrollBarVisible;
         private bool _isVerticalScrollBarVisible;
         private Vector2 _viewOffset;
-        private Point _viewOffsetMaximum;
+        private Vector2 _viewOffsetMaximum;
 
         private bool IsHorizontalScrollBarVisible
         {
@@ -136,7 +136,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
             set => Set(ref _viewOffset, value, nameof(ViewOffset));
         }
 
-        private Point ViewOffsetMaximum
+        private Vector2 ViewOffsetMaximum
         {
             get => _viewOffsetMaximum;
             set => Set(ref _viewOffsetMaximum, value, nameof(ViewOffsetMaximum));
@@ -216,7 +216,9 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
                     return;
                 }
 
-                ViewOffsetMaximum = new Point(editor.ViewWidth, editor.ViewHeight);
+                var layout = new Rect(0, 0, editor.ViewWidth, editor.ViewHeight);
+                layout.Union(editor.GetDocumentBounds());
+                ViewOffsetMaximum = new Vector2((float)layout.Width, (float)layout.Height);
                 var offset = renderer.ViewOffset;
                 ViewOffset = new Vector2(offset.X, offset.Y);
             }).AsTask();
