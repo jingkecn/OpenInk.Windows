@@ -41,6 +41,13 @@ namespace MyScript.InteractiveInk.Extensions
 
             return settings;
         }
+
+        public static Tuple<bool, bool> GetScrollBarVisibility([NotNull] this ContentPart source)
+        {
+            var type = source.Type.ToPlatformContentType();
+            var isHorizontalScrollBarVisible = type != ContentType.Text && type != ContentType.TextDocument;
+            return new Tuple<bool, bool>(isHorizontalScrollBarVisible, true);
+        }
     }
 
     public static partial class ContentPartExtensions
