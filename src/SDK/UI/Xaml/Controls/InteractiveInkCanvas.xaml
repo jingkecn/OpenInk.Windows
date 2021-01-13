@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
+    xmlns:converters="using:MyScript.InteractiveInk.Converters"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400"
@@ -12,6 +13,16 @@
     Loaded="OnLoaded"
     SizeChanged="OnSizeChanged"
     Unloaded="OnUnloaded">
+    <UserControl.Resources>
+        <converters:BoolToObjectConverter x:Key="BoolToVisibilityConverter">
+            <converters:BoolToObjectConverter.FalseValue>
+                <Visibility>Collapsed</Visibility>
+            </converters:BoolToObjectConverter.FalseValue>
+            <converters:BoolToObjectConverter.TrueValue>
+                <Visibility>Visible</Visibility>
+            </converters:BoolToObjectConverter.TrueValue>
+        </converters:BoolToObjectConverter>
+    </UserControl.Resources>
     <Grid Background="{x:Bind Container.Background, Mode=OneWay}">
         <canvas:CanvasVirtualControl x:Name="BackgroundLayer"
                                      RegionsInvalidated="OnRegionsInvalidated" />
@@ -27,5 +38,23 @@
                                      PointerReleased="OnPointerReleased"
                                      PointerWheelChanged="OnPointerWheelChanged"
                                      RegionsInvalidated="OnRegionsInvalidated" />
+        <ScrollBar IndicatorMode="MouseIndicator"
+                   LargeChange="10"
+                   Maximum="{x:Bind ViewOffsetMaximum.X, Mode=OneWay}"
+                   Orientation="Horizontal"
+                   SmallChange="1"
+                   Value="{x:Bind ViewOffset.X, Mode=OneWay}"
+                   Visibility="{x:Bind IsHorizontalScrollBarVisible, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}"
+                   VerticalAlignment="Bottom"
+                   Scroll="OnHorizontalScroll" />
+        <ScrollBar HorizontalAlignment="Right"
+                   IndicatorMode="MouseIndicator"
+                   LargeChange="10"
+                   Maximum="{x:Bind ViewOffsetMaximum.Y, Mode=OneWay}"
+                   Orientation="Vertical"
+                   SmallChange="1"
+                   Value="{x:Bind ViewOffset.Y, Mode=OneWay}"
+                   Visibility="{x:Bind IsVerticalScrollBarVisible, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}"
+                   Scroll="OnVerticalScroll" />
     </Grid>
 </UserControl>
