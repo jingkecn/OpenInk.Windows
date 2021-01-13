@@ -117,7 +117,7 @@
                                            StackMode="Replace" />
                 <Button Background="{ThemeResource SystemControlBackgroundAltMediumLowBrush}"
                         Command="{x:Bind ViewModel.InteractiveInkCommands.PageCommands.CommandResetView}"
-                        HorizontalAlignment="Right" VerticalAlignment="Top"
+                        HorizontalAlignment="Left" VerticalAlignment="Top"
                         Margin="{StaticResource XxSmallLeftTopRightBottomMargin}"
                         Width="{StaticResource LargeSize}" Height="{StaticResource LargeSize}"
                         Visibility="{x:Bind ViewModel.Page.IsViewScaleEnabled, Converter={StaticResource BoolNegationToVisibilityConverter}}">
@@ -125,7 +125,7 @@
                 </Button>
                 <Button Background="{ThemeResource SystemControlBackgroundAltMediumLowBrush}"
                         Command="{x:Bind ViewModel.InteractiveInkCommands.PageCommands.CommandResetView}"
-                        HorizontalAlignment="Right" VerticalAlignment="Top"
+                        HorizontalAlignment="Left" VerticalAlignment="Top"
                         Margin="{StaticResource XxSmallLeftTopRightBottomMargin}"
                         Width="{StaticResource LargeSize}" Height="{StaticResource LargeSize}"
                         Visibility="{x:Bind ViewModel.Page.IsViewScaleEnabled, Converter={StaticResource BoolToVisibilityConverter}}">

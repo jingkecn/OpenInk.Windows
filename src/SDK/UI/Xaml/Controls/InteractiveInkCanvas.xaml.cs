@@ -1,11 +1,16 @@
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Numerics;
+using System.Runtime.CompilerServices;
 using Windows.Devices.Input;
 using Windows.Foundation;
 using Windows.UI.Core;
 using Windows.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using MyScript.IInk;
@@ -93,35 +98,70 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
             set => SetValue(MinZoomFactorProperty, value);
         }
 
-        /// <summary>
-        ///     <inheritdoc cref="Renderer" />
-        /// </summary>
-        [CanBeNull]
-        public Renderer Renderer => Editor?.Renderer;
-
         private void Initialize([CanBeNull] Editor editor)
         {
-            Editor?.RemoveListener(this);
             SetValue(EditorProperty, editor);
-            Initialize(Editor.GetGestureSettings());
-            Editor.AddListener(this);
+            if (editor == null)
+            {
+                return;
+            }
+
+            Initialize(editor.GetGestureSettings());
+            (IsHorizontalScrollBarVisible, IsVerticalScrollBarVisible) = editor.GetScrollBarVisibility();
         }
     }
 
-    public sealed partial class InteractiveInkCanvas : IEditorListener
+    public sealed partial class InteractiveInkCanvas
     {
-        public void PartChanged(Editor editor)
+        private bool _isHorizontalScrollBarVisible;
+        private bool _isVerticalScrollBarVisible;
+        private Vector2 _viewOffset;
+        private Point _viewOffsetMaximum;
+
+        private bool IsHorizontalScrollBarVisible
         {
-            Dispatcher?.RunAsync(CoreDispatcherPriority.Normal, () => Initialize(editor.GetGestureSettings()))
-                ?.AsTask();
+            get => _isHorizontalScrollBarVisible;
+            set => Set(ref _isHorizontalScrollBarVisible, value, nameof(IsHorizontalScrollBarVisible));
         }
 
-        public void ContentChanged(Editor editor, string[] blockIds)
+        private bool IsVerticalScrollBarVisible
         {
+            get => _isVerticalScrollBarVisible;
+            set => Set(ref _isVerticalScrollBarVisible, value, nameof(IsVerticalScrollBarVisible));
         }
 
-        public void OnError(Editor editor, string blockId, string message)
+        private Vector2 ViewOffset
         {
+            get => _viewOffset;
+            set => Set(ref _viewOffset, value, nameof(ViewOffset));
+        }
+
+        private Point ViewOffsetMaximum
+        {
+            get => _viewOffsetMaximum;
+            set => Set(ref _viewOffsetMaximum, value, nameof(ViewOffsetMaximum));
+        }
+    }
+
+    public sealed partial class InteractiveInkCanvas : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void Set<TValue>(ref TValue storage, TValue value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<TValue>.Default.Equals(value, storage))
+            {
+                return;
+            }
+
+            storage = value;
+            OnPropertyChanged(propertyName);
         }
     }
 
@@ -168,6 +208,18 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
             {
                 Invalidate(TemporaryLayer, region);
             }
+
+            Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                if (!(Editor is {Renderer: { } renderer} editor))
+                {
+                    return;
+                }
+
+                ViewOffsetMaximum = new Point(editor.ViewWidth, editor.ViewHeight);
+                var offset = renderer.ViewOffset;
+                ViewOffset = new Vector2(offset.X, offset.Y);
+            }).AsTask();
         }
 
         private static void Invalidate([NotNull] CanvasVirtualControl target, Rect region)
@@ -221,7 +273,8 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
 
         private void OnManipulationUpdated(GestureRecognizer sender, ManipulationUpdatedEventArgs args)
         {
-            if (args.PointerDeviceType == PointerDeviceType.Pen || !Editor.IsScrollAllowed() ||
+            if (args.PointerDeviceType == PointerDeviceType.Pen ||
+                !(Editor is {Renderer: { } renderer} editor) || !editor.IsScrollAllowed() ||
                 (IsFingerInkingEnabled && !HasMultiTouches) || (!IsFingerInkingEnabled && IsMouseInkingEnabled))
             {
                 return;
@@ -229,8 +282,8 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
 
 
             Debug.WriteLine($"{nameof(InteractiveInkCanvas)}.{nameof(OnManipulationUpdated)}");
-            Renderer?.ChangeViewAt(args.Position.ToNative(), args.Delta.Translation.ToNative(), args.Delta.Scale,
-                (float)MaxZoomFactor, (float)MinZoomFactor, offset => Editor?.ClampViewOffset(offset));
+            renderer.ChangeViewAt(args.Position.ToNative(), args.Delta.Translation.ToNative(), args.Delta.Scale,
+                (float)MaxZoomFactor, (float)MinZoomFactor, offset => editor.ClampViewOffset(offset));
         }
     }
 
@@ -374,8 +427,39 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
 
                 using var session = sender.CreateDrawingSession(clamped);
                 using var canvas = new Canvas {DrawingSession = session};
-                Renderer?.Draw(clamped, layer, canvas);
+                Editor?.Renderer?.Draw(clamped, layer, canvas);
             }
+        }
+    }
+
+    public sealed partial class InteractiveInkCanvas
+    {
+        private void OnHorizontalScroll(object sender, ScrollEventArgs e)
+        {
+            Debug.WriteLine($"{nameof(InteractiveInkCanvas)}.{nameof(OnHorizontalScroll)}:");
+            Debug.WriteLine($"\ttype: {e.ScrollEventType}");
+            Debug.WriteLine($"\tvalue: {e.NewValue}");
+            if (!(Editor is {Renderer: { } renderer} editor) || !editor.IsScrollAllowed())
+            {
+                return;
+            }
+
+            var offset = new Point((float)e.NewValue, renderer.ViewOffset.Y);
+            renderer.ScrollTo(offset, x => editor.ClampViewOffset(x));
+        }
+
+        private void OnVerticalScroll(object sender, ScrollEventArgs e)
+        {
+            Debug.WriteLine($"{nameof(InteractiveInkCanvas)}.{nameof(OnVerticalScroll)}:");
+            Debug.WriteLine($"\ttype: {e.ScrollEventType}");
+            Debug.WriteLine($"\tvalue: {e.NewValue}");
+            if (!(Editor is {Renderer: { } renderer} editor) || !editor.IsScrollAllowed())
+            {
+                return;
+            }
+
+            var offset = new Point(renderer.ViewOffset.X, (float)e.NewValue);
+            renderer.ScrollTo(offset, x => editor.ClampViewOffset(x));
         }
     }
 

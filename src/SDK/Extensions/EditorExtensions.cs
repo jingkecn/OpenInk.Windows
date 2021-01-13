@@ -47,6 +47,11 @@ namespace MyScript.InteractiveInk.Extensions
         {
             return source.Part is { } part ? part.GetGestureSettings() : DefaultSettings;
         }
+
+        public static Tuple<bool, bool> GetScrollBarVisibility([NotNull] this Editor source)
+        {
+            return source.Part is { } part ? part.GetScrollBarVisibility() : default;
+        }
     }
 
     public static partial class EditorExtensions
