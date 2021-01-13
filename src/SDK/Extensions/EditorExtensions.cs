@@ -385,7 +385,7 @@ namespace MyScript.InteractiveInk.Extensions
     public static partial class EditorExtensions
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
-        private static Rect GetDocumentBounds([NotNull] this Editor source)
+        internal static Rect GetDocumentBounds([NotNull] this Editor source)
         {
             if (!(source.Renderer is { } renderer))
             {

@@ -216,7 +216,9 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
                     return;
                 }
 
-                ViewOffsetMaximum = new Point(editor.ViewWidth, editor.ViewHeight);
+                var layout = new Rect(0, 0, editor.ViewWidth, editor.ViewHeight);
+                layout.Union(editor.GetDocumentBounds());
+                ViewOffsetMaximum = new Point((float)layout.Width, (float)layout.Height);
                 var offset = renderer.ViewOffset;
                 ViewOffset = new Vector2(offset.X, offset.Y);
             }).AsTask();
