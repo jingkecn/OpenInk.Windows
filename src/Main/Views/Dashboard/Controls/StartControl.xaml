@@ -27,7 +27,6 @@
                     </Viewbox>
                     <Grid Grid.Row="1">
                         <TextBlock Margin="{StaticResource SmallLeftTopRightMargin}"
-                                   MaxLines="2"
                                    Style="{ThemeResource ContentTextBlockStyle}"
                                    Text="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=CommandNew}"
                                    TextAlignment="Center" />

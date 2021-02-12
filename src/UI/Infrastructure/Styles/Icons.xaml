@@ -13,6 +13,7 @@
     <x:String x:Key="FontIconQuickNote">&#xE70B;</x:String>
     <x:String x:Key="FontIconRecent">&#xE823;</x:String>
     <x:String x:Key="FontIconStatusCheckmark">&#xF1D8;</x:String>
+    <x:String x:Key="FontIconSubscriptionAdd">&#xED0E;</x:String>
     <x:String x:Key="FontIconUpdateStatusDot">&#xF83F;</x:String>
     <x:String x:Key="FontIconWalkSolid">&#xE726;</x:String>
     <!-- Font icon sources -->
