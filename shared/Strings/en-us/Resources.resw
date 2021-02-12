@@ -187,7 +187,7 @@
     <value>Math</value>
   </data>
   <data name="ContentTypeRawContent" xml:space="preserve">
-    <value>Raw content</value>
+    <value>Raw Content</value>
   </data>
   <data name="ContentTypeText" xml:space="preserve">
     <value>Text</value>
@@ -233,6 +233,9 @@
   </data>
   <data name="TitleBookProperties" xml:space="preserve">
     <value>Book Properties</value>
+  </data>
+  <data name="TitleCreatePage" xml:space="preserve">
+    <value>Create a page to start</value>
   </data>
   <data name="TitleDashboard" xml:space="preserve">
     <value>Dashboard</value>

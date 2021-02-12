@@ -15,6 +15,14 @@
             <xaml:Visibility>Collapsed</xaml:Visibility>
         </converters:BoolToObjectConverter.TrueValue>
     </converters:BoolToObjectConverter>
+    <converters:EmptyCollectionToObjectConverter x:Key="EmptyCollectionToBoolNegationConverter">
+        <converters:EmptyCollectionToObjectConverter.EmptyValue>
+            <x:Boolean>True</x:Boolean>
+        </converters:EmptyCollectionToObjectConverter.EmptyValue>
+        <converters:EmptyCollectionToObjectConverter.NotEmptyValue>
+            <x:Boolean>False</x:Boolean>
+        </converters:EmptyCollectionToObjectConverter.NotEmptyValue>
+    </converters:EmptyCollectionToObjectConverter>
     <converters:EmptyObjectToObjectConverter x:Key="EmptyObjectToBoolConverter">
         <converters:EmptyObjectToObjectConverter.EmptyValue>
             <x:Boolean>False</x:Boolean>

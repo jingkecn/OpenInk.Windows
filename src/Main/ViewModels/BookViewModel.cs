@@ -9,7 +9,6 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Navigation;
 using MyScript.Certificate;
 using MyScript.IInk;
-using MyScript.InteractiveInk.Enumerations;
 using MyScript.OpenInk.Core.Infrastructure.Extensions;
 using MyScript.OpenInk.Core.Models;
 using MyScript.OpenInk.Core.ViewModels;
@@ -77,7 +76,11 @@ namespace MyScript.OpenInk.Main.ViewModels
             await InitializeAsync(book);
             if (!(args is { } tuple))
             {
-                InteractiveInkCommands.PageCommands.CommandOpen.Execute(Pages.First());
+                if (Pages.Any())
+                {
+                    InteractiveInkCommands.PageCommands.CommandOpen.Execute(Pages.First());
+                }
+
                 return;
             }
 
@@ -106,13 +109,12 @@ namespace MyScript.OpenInk.Main.ViewModels
                 return;
             }
 
-            if (Pages.Any())
+            if (!Pages.Any())
             {
-                OnPackageContentChanged(package, null);
                 return;
             }
 
-            InteractiveInkCommands.PageCommands.CommandAdd.Execute(ContentType.TextDocument);
+            OnPackageContentChanged(package, null);
         }
 
         protected override void ReleaseManagedResources()
