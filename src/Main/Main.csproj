@@ -171,6 +171,9 @@
     <Compile Include="Views\Book\Controls\BookCommandBar.xaml.cs">
       <DependentUpon>BookCommandBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Book\Controls\BookLoading.xaml.cs">
+      <DependentUpon>BookLoading.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Book\Controls\BookStatusBar.xaml.cs">
       <DependentUpon>BookStatusBar.xaml</DependentUpon>
     </Compile>
@@ -329,6 +332,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Book\Controls\BookCommandBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Book\Controls\BookLoading.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

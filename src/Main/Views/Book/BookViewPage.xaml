@@ -52,6 +52,10 @@
             <book:BookCommandBar Grid.Row="2"
                                  x:Name="BottomCommandBar"
                                  DefaultLabelPosition="Right" />
+            <book:BookLoading Grid.Row="0" Grid.RowSpan="3"
+                              Background="{ThemeResource SystemControlBackgroundAltMediumHighBrush}"
+                              HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                              IsLoading="{x:Bind ViewModel.Book.Pages, Converter={StaticResource EmptyCollectionToBoolNegationConverter}, Mode=OneWay}" />
         </Grid>
         <!--#region Visual States-->
         <VisualStateManager.VisualStateGroups>

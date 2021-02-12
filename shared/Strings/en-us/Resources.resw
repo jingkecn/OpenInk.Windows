@@ -234,6 +234,9 @@
   <data name="TitleBookProperties" xml:space="preserve">
     <value>Book Properties</value>
   </data>
+  <data name="TitleCreatePage" xml:space="preserve">
+    <value>Create a page to start</value>
+  </data>
   <data name="TitleDashboard" xml:space="preserve">
     <value>Dashboard</value>
   </data>
