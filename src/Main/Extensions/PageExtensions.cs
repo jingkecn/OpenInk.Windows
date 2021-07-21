@@ -17,7 +17,7 @@ namespace MyScript.OpenInk.Main.Extensions
         [NotNull]
         public static ContentPart ToNative(this IPage source)
         {
-            if (!(InteractiveInkServices.EngineService.ContentPackage is { } package))
+            if (InteractiveInkServices.EngineService.ContentPackage is not { } package)
             {
                 throw new InvalidOperationException("The package is not initialized.");
             }
@@ -33,7 +33,7 @@ namespace MyScript.OpenInk.Main.Extensions
 
         public static IPage ToPlatform([NotNull] this ContentPart source)
         {
-            if (!(InteractiveInkServices.EngineService.ContentPackage is { } package))
+            if (InteractiveInkServices.EngineService.ContentPackage is not { } package)
             {
                 throw new InvalidOperationException("The package is not initialized.");
             }

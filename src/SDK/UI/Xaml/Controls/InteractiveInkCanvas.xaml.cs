@@ -211,7 +211,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
 
             Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                if (!(Editor is {Renderer: { } renderer} editor))
+                if (Editor is not {Renderer: { } renderer} editor)
                 {
                     return;
                 }
@@ -246,7 +246,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
     {
         private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            if (!(sender is UIElement element) || e.PointerDeviceType == PointerDeviceType.Pen ||
+            if (sender is not UIElement element || e.PointerDeviceType == PointerDeviceType.Pen ||
                 IsFingerInkingEnabled || IsMouseInkingEnabled)
             {
                 return;
@@ -276,7 +276,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
         private void OnManipulationUpdated(GestureRecognizer sender, ManipulationUpdatedEventArgs args)
         {
             if (args.PointerDeviceType == PointerDeviceType.Pen ||
-                !(Editor is {Renderer: { } renderer} editor) || !editor.IsScrollAllowed() ||
+                Editor is not {Renderer: { } renderer} editor || !editor.IsScrollAllowed() ||
                 (IsFingerInkingEnabled && !HasMultiTouches) || (!IsFingerInkingEnabled && IsMouseInkingEnabled))
             {
                 return;
@@ -311,7 +311,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
 
         private void OnPointerPressed(object sender, PointerRoutedEventArgs e)
         {
-            if (!(sender is UIElement element))
+            if (sender is not UIElement element)
             {
                 return;
             }
@@ -335,7 +335,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
 
         private void OnPointerMoved(object sender, PointerRoutedEventArgs e)
         {
-            if (!(sender is UIElement element))
+            if (sender is not UIElement element)
             {
                 return;
             }
@@ -354,7 +354,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
 
         private void OnPointerReleased(object sender, PointerRoutedEventArgs e)
         {
-            if (!(sender is UIElement element))
+            if (sender is not UIElement element)
             {
                 return;
             }
@@ -373,7 +373,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
 
         private void OnPointerCanceled(object sender, PointerRoutedEventArgs e)
         {
-            if (!(sender is UIElement element))
+            if (sender is not UIElement element)
             {
                 return;
             }
@@ -388,7 +388,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
 
         private void OnPointerWheelChanged(object sender, PointerRoutedEventArgs e)
         {
-            if (!(sender is UIElement element))
+            if (sender is not UIElement element)
             {
                 return;
             }
@@ -441,7 +441,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
             Debug.WriteLine($"{nameof(InteractiveInkCanvas)}.{nameof(OnHorizontalScroll)}:");
             Debug.WriteLine($"\ttype: {e.ScrollEventType}");
             Debug.WriteLine($"\tvalue: {e.NewValue}");
-            if (!(Editor is {Renderer: { } renderer} editor) || !editor.IsScrollAllowed())
+            if (Editor is not {Renderer: { } renderer} editor || !editor.IsScrollAllowed())
             {
                 return;
             }
@@ -455,7 +455,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
             Debug.WriteLine($"{nameof(InteractiveInkCanvas)}.{nameof(OnVerticalScroll)}:");
             Debug.WriteLine($"\ttype: {e.ScrollEventType}");
             Debug.WriteLine($"\tvalue: {e.NewValue}");
-            if (!(Editor is {Renderer: { } renderer} editor) || !editor.IsScrollAllowed())
+            if (Editor is not {Renderer: { } renderer} editor || !editor.IsScrollAllowed())
             {
                 return;
             }
@@ -478,19 +478,19 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
 
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (!(Editor is { } editor))
+            if (Editor is not { } editor)
             {
                 return;
             }
 
             editor.SetViewSize((int)e.NewSize.Width, (int)e.NewSize.Height);
-            if (!(editor.Renderer is { } renderer))
+            if (editor.Renderer is not { } renderer)
             {
                 return;
             }
 
             renderer.ResetViewScale();
-            if (!(editor.Part is { } part))
+            if (editor.Part is not { } part)
             {
                 return;
             }

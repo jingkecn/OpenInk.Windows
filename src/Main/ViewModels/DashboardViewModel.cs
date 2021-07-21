@@ -85,7 +85,7 @@ namespace MyScript.OpenInk.Main.ViewModels
                     throw new ArgumentOutOfRangeException();
             }
 
-            if (!(SelectedLanguage is { } language))
+            if (SelectedLanguage is not { } language)
             {
                 return;
             }
@@ -103,7 +103,7 @@ namespace MyScript.OpenInk.Main.ViewModels
             var picker = new FileOpenPicker {SuggestedStartLocation = PickerLocationId.DocumentsLibrary};
             picker.FileTypeFilter.Add(FileTypes.IInk);
             //picker.FileTypeFilter.Add(FileTypes.Nebo);
-            if (!(await picker.PickSingleFileAsync() is { } file))
+            if (await picker.PickSingleFileAsync() is not { } file)
             {
                 return;
             }

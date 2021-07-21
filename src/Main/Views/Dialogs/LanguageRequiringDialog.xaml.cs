@@ -26,12 +26,12 @@ namespace MyScript.OpenInk.Main.Views.Dialogs
 
         private void OnClosing(ContentDialog sender, ContentDialogClosingEventArgs args)
         {
-            args.Cancel = !(ViewModel.Book.Language is { } language) || !LanguageService.IsInstalled(language);
+            args.Cancel = ViewModel.Book.Language is not { } language || !LanguageService.IsInstalled(language);
         }
 
         private void OnItemClick(object sender, ItemClickEventArgs e)
         {
-            if (!(e.ClickedItem is ILanguage language))
+            if (e.ClickedItem is not ILanguage language)
             {
                 return;
             }

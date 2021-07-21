@@ -54,7 +54,7 @@ namespace MyScript.OpenInk.Main.ViewModels
                     break;
                 case "installLanguage":
                     if (!arguments.TryGetValue("language", out var idToInstall) ||
-                        !(languages.SingleOrDefault(x => x.Id == idToInstall) is { } languageToInstall))
+                        languages.SingleOrDefault(x => x.Id == idToInstall) is not { } languageToInstall)
                     {
                         return;
                     }
@@ -63,7 +63,7 @@ namespace MyScript.OpenInk.Main.ViewModels
                     break;
                 case "resumeLanguage":
                     if (!arguments.TryGetValue("language", out var idToResume) ||
-                        !(languages.SingleOrDefault(x => x.Id == idToResume) is { } languageToResume))
+                        languages.SingleOrDefault(x => x.Id == idToResume) is not { } languageToResume)
                     {
                         return;
                     }

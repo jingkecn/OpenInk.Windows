@@ -36,7 +36,7 @@ namespace MyScript.OpenInk.Main.Infrastructure.Activation
                 await InfrastructureServices.NavigationService.SwitchAsync(InfrastructureServices.ContextService.Id);
             }
 
-            if (!(RootElement is Frame frame))
+            if (RootElement is not Frame frame)
             {
                 Window.Current.Content = frame = new Frame {IsNavigationStackEnabled = false};
             }

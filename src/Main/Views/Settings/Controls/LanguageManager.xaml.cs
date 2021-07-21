@@ -18,7 +18,7 @@ namespace MyScript.OpenInk.Main.Views.Settings.Controls
 
         private void OnItemClick(object sender, ItemClickEventArgs e)
         {
-            if (!(e.ClickedItem is ILanguage language))
+            if (e.ClickedItem is not ILanguage language)
             {
                 return;
             }

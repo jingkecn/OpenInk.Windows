@@ -26,7 +26,7 @@ namespace MyScript.OpenInk.Main.Infrastructure.Activation
         {
             await base.HandleAsync(args);
             Handled = true;
-            if (!(RootElement is Frame frame))
+            if (RootElement is not Frame frame)
             {
                 Window.Current.Content = frame = new Frame {IsNavigationStackEnabled = false};
             }
