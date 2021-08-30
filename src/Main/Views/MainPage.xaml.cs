@@ -24,7 +24,7 @@ namespace MyScript.OpenInk.Main.Views
             await ViewModel.InitializeAsync();
             await ViewModel.InitializeAsync(RootFrame);
             ViewModel.Initialize(NavigationView.MenuItems.OfType<NavigationViewItem>());
-            if (!(e.Parameter is IDictionary<string, string> arguments))
+            if (e.Parameter is not IDictionary<string, string> arguments)
             {
                 return;
             }

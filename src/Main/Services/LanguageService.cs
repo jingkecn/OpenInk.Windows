@@ -126,7 +126,7 @@ namespace MyScript.OpenInk.Main.Services
                     await download.AttachAsync().AsTask(token, progress);
                 }
 
-                if (!(download.GetResponseInformation() is { } response))
+                if (download.GetResponseInformation() is not { } response)
                 {
                     return;
                 }
@@ -366,12 +366,12 @@ namespace MyScript.OpenInk.Main.Services
             var languages = new List<Language>();
             foreach (var element in deserialized.GetProperty("languages").EnumerateArray())
             {
-                if (!(element.ToString() is { } json) || !(JsonSerializer.Deserialize<Language>(json) is { } language))
+                if (element.ToString() is not { } json)
                 {
                     continue;
                 }
 
-                languages.Add(language);
+                languages.Add(JsonSerializer.Deserialize<Language>(json));
             }
 
             Languages = languages.OfType<ILanguage>().OrderBy(x => x.Id);

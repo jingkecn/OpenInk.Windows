@@ -31,7 +31,7 @@ namespace MyScript.OpenInk.Main.Infrastructure.Services
                 {
                     await view.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                     {
-                        if (!(Window.Current.Content is FrameworkElement element))
+                        if (Window.Current.Content is not FrameworkElement element)
                         {
                             return;
                         }

@@ -28,7 +28,7 @@ namespace MyScript.OpenInk.Main.Services
     {
         protected override void ReleaseUnmanagedResources()
         {
-            if (!(ContentPackage is { } package))
+            if (ContentPackage is not { } package)
             {
                 return;
             }
@@ -59,7 +59,7 @@ namespace MyScript.OpenInk.Main.Services
 
         public ContentPart CreateContentPart(ContentType type = ContentType.TextDocument)
         {
-            if (!(ContentPackage is { } package))
+            if (ContentPackage is not { } package)
             {
                 throw new InvalidOperationException("The package is not initialized.");
             }
@@ -72,7 +72,7 @@ namespace MyScript.OpenInk.Main.Services
 
         public void RemoveContentPart(ContentPart part)
         {
-            if (!(ContentPackage is { } package))
+            if (ContentPackage is not { } package)
             {
                 throw new InvalidOperationException("The package is not initialized.");
             }
@@ -86,7 +86,7 @@ namespace MyScript.OpenInk.Main.Services
 
         public async Task<StorageFile> GetTargetFileAsync()
         {
-            if (!(ContentPackage is { } package))
+            if (ContentPackage is not { } package)
             {
                 throw new InvalidOperationException("The package is not initialized.");
             }
@@ -96,7 +96,7 @@ namespace MyScript.OpenInk.Main.Services
 
         public ContentPackage Open(string path)
         {
-            if (!(Engine is { } engine))
+            if (Engine is not { } engine)
             {
                 throw new InvalidOperationException("The engine is not initialized.");
             }
@@ -110,7 +110,7 @@ namespace MyScript.OpenInk.Main.Services
 
         public async Task<ContentPackage> OpenAsync(StorageFile file)
         {
-            if (!(Engine is { } engine))
+            if (Engine is not { } engine)
             {
                 throw new InvalidOperationException("The engine is not initialized.");
             }
@@ -119,7 +119,7 @@ namespace MyScript.OpenInk.Main.Services
             // Unlock file handle if any.
             file?.CreateSafeFileHandle()?.Close();
             var previous = ContentPackage;
-            if (!(await engine.OpenAsync(file) is { } package))
+            if (await engine.OpenAsync(file) is not { } package)
             {
                 return ContentPackage = null;
             }
@@ -144,7 +144,7 @@ namespace MyScript.OpenInk.Main.Services
 
         public bool Save(string path = null)
         {
-            if (!(ContentPackage is { } package))
+            if (ContentPackage is not { } package)
             {
                 throw new InvalidOperationException("The package is not initialized.");
             }
@@ -154,7 +154,7 @@ namespace MyScript.OpenInk.Main.Services
 
         public async Task<bool> SaveAsync(bool asNew = false)
         {
-            if (!(ContentPackage is { } package))
+            if (ContentPackage is not { } package)
             {
                 throw new InvalidOperationException("The package is not initialized.");
             }
@@ -176,7 +176,7 @@ namespace MyScript.OpenInk.Main.Services
                 };
                 picker.FileTypeChoices.Add("MyScriptInteractiveInkFile".Localize(), new[] {FileTypes.IInk});
                 //picker.FileTypeChoices.Add("MyScriptNeboFile".Localize(), new[] {FileTypes.Nebo});
-                if (!(await picker.PickSaveFileAsync() is { } picked))
+                if (await picker.PickSaveFileAsync() is not { } picked)
                 {
                     return false;
                 }
@@ -195,7 +195,7 @@ namespace MyScript.OpenInk.Main.Services
 
         public Editor CreateEditor(IRenderTarget target = null)
         {
-            if (!(Engine is { } engine))
+            if (Engine is not { } engine)
             {
                 throw new InvalidOperationException("The engine is not initialized.");
             }
@@ -233,7 +233,7 @@ namespace MyScript.OpenInk.Main.Services
 
         public async Task InitializeAsync(ILanguage language)
         {
-            if (!(Engine is { } engine))
+            if (Engine is not { } engine)
             {
                 throw new InvalidOperationException("The engine is not initialized.");
             }

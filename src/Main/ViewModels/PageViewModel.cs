@@ -176,7 +176,7 @@ namespace MyScript.OpenInk.Main.ViewModels
         {
             Page = page;
             InteractiveInkServices.EditorService.GoTo(Page.ToNative());
-            if (!(Page?.ToNative()?.Package is { } package))
+            if (Page?.ToNative()?.Package is not { } package)
             {
                 return;
             }

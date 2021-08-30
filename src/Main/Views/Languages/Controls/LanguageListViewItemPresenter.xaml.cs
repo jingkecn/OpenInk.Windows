@@ -10,10 +10,19 @@ namespace MyScript.OpenInk.Main.Views.Languages.Controls
             InitializeComponent();
         }
 
+        private async void OnDataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
+        {
+            if (args.NewValue is not ILanguage language)
+            {
+                return;
+            }
+
+            await ViewModel.InitializeAsync(language);
+        }
+
         private async void OnLoaded(object sender, RoutedEventArgs e)
         {
             await ViewModel.InitializeAsync();
-            await ViewModel.InitializeAsync(DataContext as ILanguage);
         }
 
         private void OnUnloaded(object sender, RoutedEventArgs e)
