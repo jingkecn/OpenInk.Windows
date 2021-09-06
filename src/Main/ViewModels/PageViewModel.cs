@@ -212,7 +212,7 @@ namespace MyScript.OpenInk.Main.ViewModels
                 return;
             }
 
-            LanguageRequiringDialog = new LanguageRequiringDialog {DataContext = this};
+            LanguageRequiringDialog = new LanguageRequiringDialog { DataContext = this };
             await LanguageRequiringDialog.ShowAsync();
             LanguageRequiringDialog = null;
         }

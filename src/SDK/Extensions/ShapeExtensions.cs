@@ -21,13 +21,13 @@ namespace MyScript.InteractiveInk.Extensions
         [NotNull]
         public static Rectangle ToNative(this Rect source)
         {
-            return new((float)source.X, (float)source.Y,
+            return new Rectangle((float)source.X, (float)source.Y,
                 (float)source.Width, (float)source.Height);
         }
 
         public static Rect ToPlatform([NotNull] this Rectangle source)
         {
-            return new() {X = source.X, Y = source.Y, Width = source.Width, Height = source.Height};
+            return new Rect { X = source.X, Y = source.Y, Width = source.Width, Height = source.Height };
         }
     }
 }

@@ -94,7 +94,7 @@ namespace MyScript.InteractiveInk.Extensions
         public static async Task AddImageAsync([NotNull] this Editor source, Point position)
         {
             // Picks a file from the file picker.
-            var picker = new FileOpenPicker {SuggestedStartLocation = PickerLocationId.PicturesLibrary};
+            var picker = new FileOpenPicker { SuggestedStartLocation = PickerLocationId.PicturesLibrary };
             picker.FileTypeFilter.Add(MimeType.GIF.ToFileType());
             picker.FileTypeFilter.Add(MimeType.JPEG.ToFileType());
             picker.FileTypeFilter.Add(MimeType.PNG.ToFileType());

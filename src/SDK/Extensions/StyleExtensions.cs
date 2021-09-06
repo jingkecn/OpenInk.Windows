@@ -25,7 +25,7 @@ namespace MyScript.InteractiveInk.Extensions
 
         public static IInk.Graphics.Color ToNative(this Color source)
         {
-            return new(source.R, source.G, source.B, source.A);
+            return new IInk.Graphics.Color(source.R, source.G, source.B, source.A);
         }
     }
 
@@ -34,7 +34,7 @@ namespace MyScript.InteractiveInk.Extensions
         [NotNull]
         public static CanvasTextFormat GetTextFormat([NotNull] this CanvasTextLayout source, int characterIndex)
         {
-            return new()
+            return new CanvasTextFormat
             {
                 FontFamily = source.GetFontFamily(characterIndex),
                 FontSize = source.GetFontSize(characterIndex),
@@ -63,7 +63,7 @@ namespace MyScript.InteractiveInk.Extensions
                 FontFamily = source.FontFamily.ToPlatformFontFamily(style),
                 FontSize = source.FontSize.FromMillimeterToPixel(dpi),
                 FontStyle = style,
-                FontWeight = new FontWeight {Weight = (ushort)source.FontWeight},
+                FontWeight = new FontWeight { Weight = (ushort)source.FontWeight },
                 Options = CanvasDrawTextOptions.EnableColorFont,
                 WordWrapping = CanvasWordWrapping.NoWrap
             };

@@ -40,7 +40,7 @@ namespace MyScript.OpenInk.Main.Extensions
 
             var index = package.IndexOfPart(source);
             var type = source.Type.ToPlatformContentType();
-            return new Page {Index = index + 1, Type = type};
+            return new Page { Index = index + 1, Type = type };
         }
     }
 }
