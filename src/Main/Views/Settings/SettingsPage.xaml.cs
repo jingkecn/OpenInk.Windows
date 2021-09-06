@@ -19,7 +19,7 @@ namespace MyScript.OpenInk.Main.Views.Settings
         {
             await ViewModel.InitializeAsync();
             await ViewModel.InitializeAsync(SplitView);
-            if (!(e.Parameter is IDictionary<string, string> arguments))
+            if (e.Parameter is not IDictionary<string, string> arguments)
             {
                 return;
             }

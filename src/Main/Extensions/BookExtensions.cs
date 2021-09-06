@@ -31,7 +31,7 @@ namespace MyScript.OpenInk.Main.Extensions
             var configuration = InteractiveInkServices.EngineService.Engine.Configuration;
             var identifier = configuration.GetString(ConfigurationKeys.Language);
             result.Language = InteractiveInkServices.LanguageService.Languages.Single(x => x.Tag == identifier);
-            if (!(await source.GetTargetFileAsync() is { } file))
+            if (await source.GetTargetFileAsync() is not { } file)
             {
                 return result;
             }

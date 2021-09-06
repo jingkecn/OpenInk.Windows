@@ -51,7 +51,7 @@ namespace MyScript.OpenInk.Main.ViewModels
 
         public async Task OpenAsync([NotNull] StorageFile file)
         {
-            if (!(ActivationService.FileActivationHandler is FileActivationHandler handler))
+            if (ActivationService.FileActivationHandler is not FileActivationHandler handler)
             {
                 return;
             }

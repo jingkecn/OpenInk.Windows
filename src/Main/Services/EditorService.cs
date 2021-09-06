@@ -70,12 +70,12 @@ namespace MyScript.OpenInk.Main.Services
 
         public void ResetView()
         {
-            if (!(Editor is { } editor))
+            if (Editor is not { } editor)
             {
                 throw new InvalidOperationException("The editor is not Initialized");
             }
 
-            if (!(editor.Renderer is { } renderer))
+            if (editor.Renderer is not { } renderer)
             {
                 return;
             }
@@ -86,7 +86,7 @@ namespace MyScript.OpenInk.Main.Services
 
         public void Typeset()
         {
-            if (!(Editor is { } editor))
+            if (Editor is not { } editor)
             {
                 throw new InvalidOperationException("The editor is not Initialized");
             }
@@ -106,7 +106,7 @@ namespace MyScript.OpenInk.Main.Services
 
         public async Task CopyAsync(Point position)
         {
-            if (!(Editor is { } editor))
+            if (Editor is not { } editor)
             {
                 throw new InvalidOperationException("The editor is not Initialized");
             }
@@ -117,7 +117,7 @@ namespace MyScript.OpenInk.Main.Services
 
         public async Task CopyAsync(ContentBlock block)
         {
-            if (!(Editor is { } editor))
+            if (Editor is not { } editor)
             {
                 throw new InvalidOperationException("The editor is not Initialized");
             }
@@ -132,7 +132,7 @@ namespace MyScript.OpenInk.Main.Services
 
         public async Task PasteAsync(Point position)
         {
-            if (!(Editor is { } editor))
+            if (Editor is not { } editor)
             {
                 throw new InvalidOperationException("The editor is not Initialized");
             }
@@ -143,7 +143,7 @@ namespace MyScript.OpenInk.Main.Services
 
         public async Task PasteAsync()
         {
-            if (!(Editor is { } editor))
+            if (Editor is not { } editor)
             {
                 throw new InvalidOperationException("The editor is not Initialized");
             }
@@ -157,7 +157,7 @@ namespace MyScript.OpenInk.Main.Services
 
         public void Redo()
         {
-            if (!(Editor is { } editor))
+            if (Editor is not { } editor)
             {
                 throw new InvalidOperationException("The editor is not Initialized");
             }
@@ -167,7 +167,7 @@ namespace MyScript.OpenInk.Main.Services
 
         public void Undo()
         {
-            if (!(Editor is { } editor))
+            if (Editor is not { } editor)
             {
                 throw new InvalidOperationException("The editor is not Initialized");
             }
@@ -175,11 +175,11 @@ namespace MyScript.OpenInk.Main.Services
             editor.Undo();
         }
 
-        public bool IsEmpty => !(Editor is { } editor) || editor.IsEmpty(null);
+        public bool IsEmpty => Editor is not { } editor || editor.IsEmpty(null);
 
         public bool CanAddBlockAt(Point position)
         {
-            if (!(Editor is { } editor))
+            if (Editor is not { } editor)
             {
                 throw new InvalidOperationException("The editor is not Initialized");
             }
@@ -189,7 +189,7 @@ namespace MyScript.OpenInk.Main.Services
 
         public bool CanRemoveBlock(ContentBlock block)
         {
-            if (!(Editor is { } editor))
+            if (Editor is not { } editor)
             {
                 throw new InvalidOperationException("The editor is not Initialized");
             }
@@ -199,7 +199,7 @@ namespace MyScript.OpenInk.Main.Services
 
         public bool CanRemoveBlockAt(Point position)
         {
-            if (!(Editor is { } editor))
+            if (Editor is not { } editor)
             {
                 throw new InvalidOperationException("The editor is not Initialized");
             }
@@ -209,7 +209,7 @@ namespace MyScript.OpenInk.Main.Services
 
         public void AppendBlock(ContentType type, bool autoScroll = true)
         {
-            if (!(Editor is { } editor))
+            if (Editor is not { } editor)
             {
                 throw new InvalidOperationException("The editor is not Initialized");
             }
@@ -219,7 +219,7 @@ namespace MyScript.OpenInk.Main.Services
 
         public void AddBlockAt(Point position, ContentType type)
         {
-            if (!(Editor is { } editor))
+            if (Editor is not { } editor)
             {
                 throw new InvalidOperationException("The editor is not Initialized");
             }
@@ -229,7 +229,7 @@ namespace MyScript.OpenInk.Main.Services
 
         public void RemoveBlock(ContentBlock block)
         {
-            if (!(Editor is { } editor))
+            if (Editor is not { } editor)
             {
                 throw new InvalidOperationException("The editor is not Initialized");
             }
@@ -240,7 +240,7 @@ namespace MyScript.OpenInk.Main.Services
 
         public void RemoveBlockAt(Point position)
         {
-            if (!(Editor is { } editor))
+            if (Editor is not { } editor)
             {
                 throw new InvalidOperationException("The editor is not Initialized");
             }
@@ -253,7 +253,7 @@ namespace MyScript.OpenInk.Main.Services
 
         public void GoBack()
         {
-            if (!(Editor is { } editor))
+            if (Editor is not { } editor)
             {
                 throw new InvalidOperationException("The editor is not Initialized");
             }
@@ -263,7 +263,7 @@ namespace MyScript.OpenInk.Main.Services
 
         public void GoForward()
         {
-            if (!(Editor is { } editor))
+            if (Editor is not { } editor)
             {
                 throw new InvalidOperationException("The editor is not Initialized");
             }
@@ -273,7 +273,7 @@ namespace MyScript.OpenInk.Main.Services
 
         public void GoTo(ContentPart part)
         {
-            if (!(Editor is { } editor))
+            if (Editor is not { } editor)
             {
                 throw new InvalidOperationException("The editor is not Initialized");
             }

@@ -78,7 +78,7 @@ namespace MyScript.InteractiveInk.UI.Implementations
 
         public void DrawPath(IPath path)
         {
-            if (!(path is Path target) || !(target.Geometry is { } geometry))
+            if (path is not Path target || target.Geometry is not { } geometry)
             {
                 return;
             }

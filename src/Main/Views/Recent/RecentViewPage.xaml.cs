@@ -23,7 +23,7 @@ namespace MyScript.OpenInk.Main.Views.Recent
 
         private async void OnItemClick(object sender, ItemClickEventArgs e)
         {
-            if (!(e.ClickedItem is StorageFile file))
+            if (e.ClickedItem is not StorageFile file)
             {
                 return;
             }

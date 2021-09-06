@@ -55,7 +55,7 @@ namespace MyScript.InteractiveInk.Extensions
         [CanBeNull]
         public static ContentPart GetNext([NotNull] this ContentPart source)
         {
-            if (!(source.Package is { } package))
+            if (source.Package is not { } package)
             {
                 return null;
             }
@@ -67,7 +67,7 @@ namespace MyScript.InteractiveInk.Extensions
         [CanBeNull]
         public static ContentPart GetPrevious([NotNull] this ContentPart source)
         {
-            if (!(source.Package is { } package))
+            if (source.Package is not { } package)
             {
                 return null;
             }

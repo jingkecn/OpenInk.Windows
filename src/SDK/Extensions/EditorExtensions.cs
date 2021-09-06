@@ -20,7 +20,7 @@ namespace MyScript.InteractiveInk.Extensions
         public static void Apply([NotNull] this Editor source, PenStyle style)
         {
             Debug.WriteLine($"{nameof(Editor)}.{nameof(Apply)}:");
-            if (!(source.Renderer is { } renderer))
+            if (source.Renderer is not { } renderer)
             {
                 return;
             }
@@ -74,7 +74,7 @@ namespace MyScript.InteractiveInk.Extensions
         /// </param>
         public static void AppendBlock([NotNull] this Editor source, ContentType type, bool autoScroll = true)
         {
-            if (!source.CanAddBlock(type) || !(source.Renderer is { } renderer))
+            if (!source.CanAddBlock(type) || source.Renderer is not { } renderer)
             {
                 return;
             }
@@ -99,7 +99,7 @@ namespace MyScript.InteractiveInk.Extensions
             picker.FileTypeFilter.Add(MimeType.JPEG.ToFileType());
             picker.FileTypeFilter.Add(MimeType.PNG.ToFileType());
             picker.FileTypeFilter.Add(MimeType.SVG.ToFileType());
-            if (!(await picker.PickSingleFileAsync() is { } picked))
+            if (await picker.PickSingleFileAsync() is not { } picked)
             {
                 return;
             }
@@ -112,7 +112,7 @@ namespace MyScript.InteractiveInk.Extensions
 
         public static async Task AppendImageAsync([NotNull] this Editor source, bool autoScroll = true)
         {
-            if (!(source.Renderer is { } renderer))
+            if (source.Renderer is not { } renderer)
             {
                 return;
             }
@@ -137,7 +137,7 @@ namespace MyScript.InteractiveInk.Extensions
         public static bool CanAddBlockAt([NotNull] this Editor source, Point position, bool defaultValue = default)
         {
             return (source.Part is { } part && part.Type.ToPlatformContentType() == ContentType.TextDocument &&
-                    (!(source.GetBlockAt(position) is { } block) || block.IsContainer())) || defaultValue;
+                    (source.GetBlockAt(position) is not { } block || block.IsContainer())) || defaultValue;
         }
 
         public static bool CanRemoveBlock([NotNull] this Editor source, [NotNull] ContentBlock block,
@@ -186,7 +186,7 @@ namespace MyScript.InteractiveInk.Extensions
         public static bool CanPasteAt([NotNull] this Editor source, Point position)
         {
             return source.Part is { } part && part.Type.ToPlatformContentType() == ContentType.TextDocument &&
-                   (!(source.GetBlockAt(position) is { } block) || block.IsContainer());
+                   (source.GetBlockAt(position) is not { } block || block.IsContainer());
         }
 
         public static void CopyAt([NotNull] this Editor source, Point position)
@@ -387,7 +387,7 @@ namespace MyScript.InteractiveInk.Extensions
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         internal static Rect GetDocumentBounds([NotNull] this Editor source)
         {
-            if (!(source.Renderer is { } renderer))
+            if (source.Renderer is not { } renderer)
             {
                 return Rect.Empty;
             }

@@ -67,14 +67,14 @@ namespace MyScript.OpenInk.Main.ViewModels
         private async void OnPackageContentChanged(ContentPackage sender,
             Tuple<IEnumerable<ContentPart>, IEnumerable<ContentPart>> args)
         {
-            if (!(sender is { } package))
+            if (sender is not { } package)
             {
                 return;
             }
 
             var book = await package.ToPlatformAsync();
             await InitializeAsync(book);
-            if (!(args is { } tuple))
+            if (args is not { } tuple)
             {
                 if (Pages.Any())
                 {
@@ -86,7 +86,7 @@ namespace MyScript.OpenInk.Main.ViewModels
 
             var (removed, added) = tuple;
             if ((removed?.ToList() is { } removedList && removedList.Any()) ||
-                !(added?.ToList() is { } addedList) || !addedList.Any())
+                added?.ToList() is not { } addedList || !addedList.Any())
             {
                 return;
             }
@@ -96,7 +96,7 @@ namespace MyScript.OpenInk.Main.ViewModels
 
         private async void OnPackageChanged(ContentPackage current, ContentPackage previous)
         {
-            if (!(current is { } package))
+            if (current is not { } package)
             {
                 return;
             }
@@ -153,7 +153,7 @@ namespace MyScript.OpenInk.Main.ViewModels
                 InteractiveInkCommands.BookCommands.CommandOpen.Execute(file);
             }
 
-            if (!(InteractiveInkServices.EngineService.ContentPackage is { } package))
+            if (InteractiveInkServices.EngineService.ContentPackage is not { } package)
             {
                 return;
             }
@@ -168,7 +168,7 @@ namespace MyScript.OpenInk.Main.ViewModels
                 InteractiveInkCommands.BookCommands.CommandCreate.Execute(path);
             }
 
-            if (!(InteractiveInkServices.EngineService.ContentPackage is { } package))
+            if (InteractiveInkServices.EngineService.ContentPackage is not { } package)
             {
                 return;
             }

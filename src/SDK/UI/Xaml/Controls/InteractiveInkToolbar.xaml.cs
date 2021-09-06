@@ -46,14 +46,14 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
 
         private void OnActiveToolChanged(Windows.UI.Xaml.Controls.InkToolbar sender, object args)
         {
-            if (!(TargetInkCanvas is { } canvas))
+            if (TargetInkCanvas is not { } canvas)
             {
                 return;
             }
 
             var tool = sender.ActiveTool.ToolKind;
             canvas.InkToolbarTool = tool;
-            if (!(Editor is { } editor))
+            if (Editor is not { } editor)
             {
                 return;
             }
@@ -79,7 +79,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
 
         private void OnInkDrawingAttributesChanged(Windows.UI.Xaml.Controls.InkToolbar sender, object args)
         {
-            if (!(Editor is { } editor))
+            if (Editor is not { } editor)
             {
                 return;
             }
@@ -105,7 +105,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
 
         private void OnCalligraphyPenChecked(object sender, RoutedEventArgs e)
         {
-            if (!(Editor is { } editor))
+            if (Editor is not { } editor)
             {
                 return;
             }
