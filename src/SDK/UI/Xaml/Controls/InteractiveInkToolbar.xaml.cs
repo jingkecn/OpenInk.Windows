@@ -42,7 +42,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
 
     public sealed partial class InteractiveInkToolbar
     {
-        private PenStyle PenStyle { get; set; } = new() {Brush = PenBrush.FeltPen, Color = default};
+        private PenStyle PenStyle { get; set; } = new() { Brush = PenBrush.FeltPen, Color = default };
 
         private void OnActiveToolChanged(Windows.UI.Xaml.Controls.InkToolbar sender, object args)
         {

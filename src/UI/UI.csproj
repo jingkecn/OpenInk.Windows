@@ -125,7 +125,7 @@
     <Compile Include="Infrastructure\Converters\FileSizeToFriendlyStringConverter.cs" />
     <Compile Include="Infrastructure\Extensions\DisplayExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\NavigationExtensions.cs" />
-    <Compile Include="Infrastructure\ViewModels\IInAppNotificationViewModel.cs" />
+    <Compile Include="Infrastructure\ViewModels\IInfoBarViewModel.cs" />
     <Compile Include="Templates\ContentHeaderTemplates.xaml.cs">
       <DependentUpon>ContentHeaderTemplates.xaml</DependentUpon>
     </Compile>
@@ -137,13 +137,13 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.2.11</Version>
+      <Version>6.2.12</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
-      <Version>6.1.1</Version>
+      <Version>7.0.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
-      <Version>2.4.3</Version>
+      <Version>2.7.0-prerelease.210827001</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

@@ -20,7 +20,6 @@ namespace MyScript.OpenInk.Main.Views.Page
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             await ViewModel.InitializeAsync();
-            await ViewModel.InitializeAsync(InAppNotification);
             await ViewModel.InitializeAsync(InteractiveInkCanvas);
             await ViewModel.InitializeAsync(e.Parameter as IPage);
         }

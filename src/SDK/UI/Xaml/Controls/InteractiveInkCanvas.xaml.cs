@@ -211,7 +211,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
 
             Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                if (Editor is not {Renderer: { } renderer} editor)
+                if (Editor is not { Renderer: { } renderer } editor)
                 {
                     return;
                 }
@@ -265,7 +265,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
         private GestureRecognizer _gestureRecognizer;
 
         private GestureRecognizer GestureRecognizer => _gestureRecognizer ??=
-            new GestureRecognizer {GestureSettings = EditorExtensions.DefaultSettings};
+            new GestureRecognizer { GestureSettings = EditorExtensions.DefaultSettings };
 
         private void Initialize(GestureSettings settings)
         {
@@ -276,7 +276,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
         private void OnManipulationUpdated(GestureRecognizer sender, ManipulationUpdatedEventArgs args)
         {
             if (args.PointerDeviceType == PointerDeviceType.Pen ||
-                Editor is not {Renderer: { } renderer} editor || !editor.IsScrollAllowed() ||
+                Editor is not { Renderer: { } renderer } editor || !editor.IsScrollAllowed() ||
                 (IsFingerInkingEnabled && !HasMultiTouches) || (!IsFingerInkingEnabled && IsMouseInkingEnabled))
             {
                 return;
@@ -428,7 +428,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
                 }
 
                 using var session = sender.CreateDrawingSession(clamped);
-                using var canvas = new Canvas {DrawingSession = session};
+                using var canvas = new Canvas { DrawingSession = session };
                 Editor?.Renderer?.Draw(clamped, layer, canvas);
             }
         }
@@ -441,7 +441,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
             Debug.WriteLine($"{nameof(InteractiveInkCanvas)}.{nameof(OnHorizontalScroll)}:");
             Debug.WriteLine($"\ttype: {e.ScrollEventType}");
             Debug.WriteLine($"\tvalue: {e.NewValue}");
-            if (Editor is not {Renderer: { } renderer} editor || !editor.IsScrollAllowed())
+            if (Editor is not { Renderer: { } renderer } editor || !editor.IsScrollAllowed())
             {
                 return;
             }
@@ -455,7 +455,7 @@ namespace MyScript.InteractiveInk.UI.Xaml.Controls
             Debug.WriteLine($"{nameof(InteractiveInkCanvas)}.{nameof(OnVerticalScroll)}:");
             Debug.WriteLine($"\ttype: {e.ScrollEventType}");
             Debug.WriteLine($"\tvalue: {e.NewValue}");
-            if (Editor is not {Renderer: { } renderer} editor || !editor.IsScrollAllowed())
+            if (Editor is not { Renderer: { } renderer } editor || !editor.IsScrollAllowed())
             {
                 return;
             }
