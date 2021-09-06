@@ -42,7 +42,7 @@ namespace MyScript.OpenInk.Main.Infrastructure.Activation
                 return;
             }
 
-            if (RootElement is Frame {Content: null})
+            if (RootElement is Frame { Content: null })
             {
                 Window.Current.Content = new ExtendedSplash();
             }

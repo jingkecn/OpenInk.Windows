@@ -66,7 +66,7 @@ namespace MyScript.OpenInk.Main.Services
 
             var part = package.CreatePart(type.ToNative());
             OnPackageContentChanged(package,
-                new Tuple<IEnumerable<ContentPart>, IEnumerable<ContentPart>>(null, new[] {part}));
+                new Tuple<IEnumerable<ContentPart>, IEnumerable<ContentPart>>(null, new[] { part }));
             return part;
         }
 
@@ -79,7 +79,7 @@ namespace MyScript.OpenInk.Main.Services
 
             package.RemovePart(part);
             OnPackageContentChanged(package,
-                new Tuple<IEnumerable<ContentPart>, IEnumerable<ContentPart>>(new[] {part}, null));
+                new Tuple<IEnumerable<ContentPart>, IEnumerable<ContentPart>>(new[] { part }, null));
         }
 
         public ContentPackage ContentPackage { get; private set; }
@@ -174,7 +174,7 @@ namespace MyScript.OpenInk.Main.Services
                 {
                     SuggestedFileName = "New Document", SuggestedStartLocation = PickerLocationId.DocumentsLibrary
                 };
-                picker.FileTypeChoices.Add("MyScriptInteractiveInkFile".Localize(), new[] {FileTypes.IInk});
+                picker.FileTypeChoices.Add("MyScriptInteractiveInkFile".Localize(), new[] { FileTypes.IInk });
                 //picker.FileTypeChoices.Add("MyScriptNeboFile".Localize(), new[] {FileTypes.Nebo});
                 if (await picker.PickSaveFileAsync() is not { } picked)
                 {
@@ -218,7 +218,7 @@ namespace MyScript.OpenInk.Main.Services
             var engine = Engine.Create((byte[])(Array)certificate);
             var configuration = engine.Configuration;
             configuration.SetStringArray(ConfigurationKeys.ConfigurationManagerSearchPath,
-                new[] {Path.Combine(ApplicationData.Current.LocalFolder.Path, "Assets", "conf")});
+                new[] { Path.Combine(ApplicationData.Current.LocalFolder.Path, "Assets", "conf") });
             configuration.SetString(ConfigurationKeys.ContentPackageTempFolder,
                 ApplicationData.Current.TemporaryFolder.Path);
 #if DEBUG

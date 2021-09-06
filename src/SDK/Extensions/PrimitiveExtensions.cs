@@ -36,7 +36,7 @@ namespace MyScript.InteractiveInk.Extensions
 
         public static Rect FromPixelToMillimeter(this Rect source, float dpiX, float dpiY)
         {
-            return new()
+            return new Rect
             {
                 X = ((float)source.X).FromPixelToMillimeter(dpiX),
                 Y = ((float)source.Y).FromPixelToMillimeter(dpiY),
@@ -47,7 +47,7 @@ namespace MyScript.InteractiveInk.Extensions
 
         public static Rect FromMillimeterToPixel(this Rect source, float dpiX, float dpiY)
         {
-            return new()
+            return new Rect
             {
                 X = ((float)source.X).FromMillimeterToPixel(dpiX),
                 Y = ((float)source.Y).FromMillimeterToPixel(dpiY),
@@ -71,7 +71,7 @@ namespace MyScript.InteractiveInk.Extensions
 
         public static Rect FromEmToPixel(this Rect source, float fontSize)
         {
-            return new()
+            return new Rect
             {
                 X = ((float)source.X).FromEmToPixel(fontSize),
                 Y = ((float)source.Y).FromEmToPixel(fontSize),
@@ -82,7 +82,7 @@ namespace MyScript.InteractiveInk.Extensions
 
         public static Rect FromPixelToEm(this Rect source, float fontSize)
         {
-            return new()
+            return new Rect
             {
                 X = ((float)source.X).FromPixelToEm(fontSize),
                 Y = ((float)source.Y).FromPixelToEm(fontSize),

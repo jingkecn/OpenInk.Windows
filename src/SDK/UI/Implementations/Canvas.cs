@@ -73,7 +73,7 @@ namespace MyScript.InteractiveInk.UI.Implementations
             var builder = new CanvasPathBuilder(DrawingSession.Device);
             builder.SetFilledRegionDetermination(FillRule);
             builder.SetSegmentOptions(CanvasFigureSegmentOptions.None);
-            return new Path {PathBuilder = builder};
+            return new Path { PathBuilder = builder };
         }
 
         public void DrawPath(IPath path)
@@ -202,7 +202,7 @@ namespace MyScript.InteractiveInk.UI.Implementations
             TextFormat.FontFamily = family.ToPlatformFontFamily(fontStyle);
             TextFormat.FontSize = size;
             TextFormat.FontStyle = fontStyle;
-            TextFormat.FontWeight = new FontWeight {Weight = (ushort)weight};
+            TextFormat.FontWeight = new FontWeight { Weight = (ushort)weight };
             TextFormat.Options = CanvasDrawTextOptions.EnableColorFont;
             using var layout =
                 new CanvasTextLayout(DrawingSession.Device, "k", TextFormat, float.MaxValue, float.MaxValue);

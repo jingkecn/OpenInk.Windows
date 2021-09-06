@@ -100,7 +100,7 @@ namespace MyScript.OpenInk.Main.ViewModels
 
         private async Task OpenBookAsync()
         {
-            var picker = new FileOpenPicker {SuggestedStartLocation = PickerLocationId.DocumentsLibrary};
+            var picker = new FileOpenPicker { SuggestedStartLocation = PickerLocationId.DocumentsLibrary };
             picker.FileTypeFilter.Add(FileTypes.IInk);
             //picker.FileTypeFilter.Add(FileTypes.Nebo);
             if (await picker.PickSingleFileAsync() is not { } file)
@@ -119,7 +119,7 @@ namespace MyScript.OpenInk.Main.ViewModels
             InstalledLanguages.SyncWith(languages);
             InstalledLanguages.SortBy(x => x.Id);
             InteractiveInkServices.LanguageService.Initialized += OnLanguageInitialized;
-            var dialog = new LanguageSelector {DataContext = this};
+            var dialog = new LanguageSelector { DataContext = this };
             var result = await dialog.ShowAsync();
             InteractiveInkServices.LanguageService.Initialized -= OnLanguageInitialized;
             return result;

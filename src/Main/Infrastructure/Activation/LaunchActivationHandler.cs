@@ -38,7 +38,7 @@ namespace MyScript.OpenInk.Main.Infrastructure.Activation
 
             if (RootElement is not Frame frame)
             {
-                Window.Current.Content = frame = new Frame {IsNavigationStackEnabled = false};
+                Window.Current.Content = frame = new Frame { IsNavigationStackEnabled = false };
             }
 
             if (frame.Content?.GetType() != DefaultPage)

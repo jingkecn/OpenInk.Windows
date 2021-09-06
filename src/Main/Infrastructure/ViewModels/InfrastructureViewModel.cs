@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Microsoft.Toolkit.Uwp.UI.Controls;
 using MyScript.OpenInk.Core.Infrastructure.Services;
 using MyScript.OpenInk.Core.Infrastructure.ViewModels;
 using MyScript.OpenInk.Main.Configuration;
@@ -62,14 +61,28 @@ namespace MyScript.OpenInk.Main.Infrastructure.ViewModels
         }
     }
 
-    public abstract partial class InfrastructureViewModel : IInAppNotificationViewModel
+    public abstract partial class InfrastructureViewModel : IInfoBarViewModel
     {
-        public InAppNotification InAppNotification { get; private set; }
+        private string _infoMessage;
+        private string _infoTitle;
+        private bool _isInfoBarOpen;
 
-        public async Task InitializeAsync(InAppNotification notifier)
+        public bool IsInfoBarOpen
         {
-            InAppNotification = notifier;
-            await Task.CompletedTask;
+            get => _isInfoBarOpen;
+            set => Set(ref _isInfoBarOpen, value, nameof(IsInfoBarOpen));
+        }
+
+        public string InfoMessage
+        {
+            get => _infoMessage;
+            set => Set(ref _infoMessage, value, nameof(InfoMessage));
+        }
+
+        public string InfoTitle
+        {
+            get => _infoTitle;
+            set => Set(ref _infoTitle, value, nameof(InfoTitle));
         }
     }
 

@@ -85,14 +85,14 @@ namespace MyScript.InteractiveInk.Extensions
     {
         public static Transform ToNative(this Matrix3x2 source)
         {
-            return new(
+            return new Transform(
                 source.M11, source.M21, source.M31,
                 source.M12, source.M22, source.M32);
         }
 
         public static Matrix3x2 ToPlatform(this Transform source)
         {
-            return new(
+            return new Matrix3x2(
                 (float)source.XX, (float)source.XY,
                 (float)source.YX, (float)source.YY,
                 (float)source.TX, (float)source.TY);

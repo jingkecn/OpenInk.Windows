@@ -6,12 +6,12 @@ namespace MyScript.InteractiveInk.Extensions
     {
         public static Point ToPlatform(this IInk.Graphics.Point source)
         {
-            return new(source.X, source.Y);
+            return new Point(source.X, source.Y);
         }
 
         public static IInk.Graphics.Point ToNative(this Point source)
         {
-            return new((float)source.X, (float)source.Y);
+            return new IInk.Graphics.Point((float)source.X, (float)source.Y);
         }
     }
 }
