@@ -8,7 +8,6 @@
     xmlns:iink="using:MyScript.InteractiveInk.UI.Xaml.Controls"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:page="using:MyScript.OpenInk.Main.Views.Page.Controls"
-    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:vm="using:MyScript.OpenInk.Main.ViewModels"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -113,11 +112,14 @@
                                            Label="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=CommandPaste}" />
                     </iink:InteractiveInkCanvas.Resources>
                 </iink:InteractiveInkCanvas>
-                <toolkit:InAppNotification x:Name="InAppNotification"
-                                           StackMode="Replace" />
+                <muxc:InfoBar IsClosable="True"
+                              IsOpen="{x:Bind ViewModel.IsInfoBarOpen, Mode=TwoWay}"
+                              Message="{x:Bind ViewModel.InfoMessage, Mode=OneWay}"
+                              Severity="Warning"
+                              Title="{x:Bind ViewModel.InfoTitle, Mode=OneWay}" />
                 <Button Background="{ThemeResource SystemControlBackgroundAltMediumLowBrush}"
                         Command="{x:Bind ViewModel.InteractiveInkCommands.PageCommands.CommandResetView}"
-                        HorizontalAlignment="Left" VerticalAlignment="Top"
+                        HorizontalAlignment="Left" VerticalAlignment="Bottom"
                         Margin="{StaticResource XxSmallLeftTopRightBottomMargin}"
                         Width="{StaticResource LargeSize}" Height="{StaticResource LargeSize}"
                         Visibility="{x:Bind ViewModel.Page.IsViewScaleEnabled, Converter={StaticResource BoolNegationToVisibilityConverter}}">
@@ -125,7 +127,7 @@
                 </Button>
                 <Button Background="{ThemeResource SystemControlBackgroundAltMediumLowBrush}"
                         Command="{x:Bind ViewModel.InteractiveInkCommands.PageCommands.CommandResetView}"
-                        HorizontalAlignment="Left" VerticalAlignment="Top"
+                        HorizontalAlignment="Left" VerticalAlignment="Bottom"
                         Margin="{StaticResource XxSmallLeftTopRightBottomMargin}"
                         Width="{StaticResource LargeSize}" Height="{StaticResource LargeSize}"
                         Visibility="{x:Bind ViewModel.Page.IsViewScaleEnabled, Converter={StaticResource BoolToVisibilityConverter}}">

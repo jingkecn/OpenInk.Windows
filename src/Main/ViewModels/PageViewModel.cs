@@ -79,7 +79,11 @@ namespace MyScript.OpenInk.Main.ViewModels
         {
             var (block, message) = args;
             await InfrastructureServices.ContextService.RunAsync(() =>
-                InAppNotification?.Show($"{block.Id}: {message}", 5000));
+            {
+                InfoMessage = message;
+                InfoTitle = block.Id;
+                IsInfoBarOpen = true;
+            });
         }
 
         private async void OnSelectionChanged(Editor sender, IEnumerable<ContentBlock> args)

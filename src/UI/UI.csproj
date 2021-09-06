@@ -125,7 +125,7 @@
     <Compile Include="Infrastructure\Converters\FileSizeToFriendlyStringConverter.cs" />
     <Compile Include="Infrastructure\Extensions\DisplayExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\NavigationExtensions.cs" />
-    <Compile Include="Infrastructure\ViewModels\IInAppNotificationViewModel.cs" />
+    <Compile Include="Infrastructure\ViewModels\IInfoBarViewModel.cs" />
     <Compile Include="Templates\ContentHeaderTemplates.xaml.cs">
       <DependentUpon>ContentHeaderTemplates.xaml</DependentUpon>
     </Compile>
