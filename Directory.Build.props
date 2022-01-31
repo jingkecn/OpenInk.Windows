@@ -8,6 +8,7 @@
         <Company>MyScript</Company>
         <Product>OpenInk</Product>
         <MyScriptSDK>InteractiveInk</MyScriptSDK>
+        <MyScriptSDKVersion>1.4</MyScriptSDKVersion>
     </PropertyGroup>
     <PropertyGroup>
         <RepositoryDirectory>$(MSBuildThisFileDirectory.TrimEnd('\\/'))</RepositoryDirectory>
