@@ -2,53 +2,49 @@
 ~ Tasks provide the code that runs during the build process. The tasks in the following list are included with MSBuild.
 ~ See: https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-task-reference
 -->
+<!--EXTERNAL_PROPERTIES: MyScriptSDKVersion;RepositoryDirectory-->
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <PropertyGroup>
-        <ResourceRepositoryName>myscript-recognition-assets</ResourceRepositoryName>
-        <ResourceRepositoryVersion>1.4</ResourceRepositoryVersion>
-        <ResourceRepositorySourceUrl>https://codeload.github.com/jingkecn/$(ResourceRepositoryName)/zip/v$(ResourceRepositoryVersion)</ResourceRepositorySourceUrl>
-    </PropertyGroup>
-    <PropertyGroup>
-        <ResourceBaseName>myscript-iink-recognition</ResourceBaseName>
-        <ResourceBaseURL>https://github.com/jingkecn/myscript-recognition-assets/releases</ResourceBaseURL>
-        <ResourceFileExtension>zip</ResourceFileExtension>
-        <ResourceVersion>latest</ResourceVersion>
-    </PropertyGroup>
-    <PropertyGroup>
-        <ResourceVersionUrl>$(ResourceBaseURL)/$(ResourceVersion)/download</ResourceVersionUrl>
-        <ResourceTemporaryFolder>$(RepositoryDirectory)/shared/Resources/_temp</ResourceTemporaryFolder>
-        <ResourceDestinationFolder>$(RepositoryDirectory)/shared/Resources/Assets</ResourceDestinationFolder>
-    </PropertyGroup>
-    <PropertyGroup>
-        <ResourceDiagram>$(ResourceBaseName)-diagram.$(ResourceFileExtension)</ResourceDiagram>
-        <ResourceMath>$(ResourceBaseName)-math.$(ResourceFileExtension)</ResourceMath>
-        <ResourceRawContent>$(ResourceBaseName)-raw-content.$(ResourceFileExtension)</ResourceRawContent>
-        <ResourceTextEnUs>$(ResourceBaseName)-text-en_US.$(ResourceFileExtension)</ResourceTextEnUs>
-        <ResourceTextZhCn>$(ResourceBaseName)-text-zh_CN.$(ResourceFileExtension)</ResourceTextZhCn>
-    </PropertyGroup>
-    <Target Name="Download" Condition="!Exists('$(ResourceTemporaryFolder)')">
-        <!-- See: https://docs.microsoft.com/en-us/visualstudio/msbuild/downloadfile-task -->
-        <DownloadFile DestinationFolder="$(ResourceTemporaryFolder)" SourceUrl="$(ResourceRepositorySourceUrl)" />
-        <DownloadFile DestinationFolder="$(ResourceTemporaryFolder)" SourceUrl="$(ResourceVersionUrl)/$(ResourceDiagram)" />
-        <DownloadFile DestinationFolder="$(ResourceTemporaryFolder)" SourceUrl="$(ResourceVersionUrl)/$(ResourceMath)" />
-        <DownloadFile DestinationFolder="$(ResourceTemporaryFolder)" SourceUrl="$(ResourceVersionUrl)/$(ResourceRawContent)" />
-        <DownloadFile DestinationFolder="$(ResourceTemporaryFolder)" SourceUrl="$(ResourceVersionUrl)/$(ResourceTextEnUs)" />
-        <DownloadFile DestinationFolder="$(ResourceTemporaryFolder)" SourceUrl="$(ResourceVersionUrl)/$(ResourceTextZhCn)" />
-    </Target>
-    <Target Name="Unzip" DependsOnTargets="Download">
-        <ItemGroup>
-            <ToUnZipItems Include="$(ResourceTemporaryFolder)/*.zip" />
-        </ItemGroup>
-        <!-- See: https://docs.microsoft.com/en-us/visualstudio/msbuild/unzip-task -->
-        <Unzip ContinueOnError="true" DestinationFolder="$(ResourceTemporaryFolder)" SourceFiles="@(ToUnZipItems)" />
-    </Target>
-    <Target Name="Move" DependsOnTargets="Unzip">
-        <ItemGroup>
-            <ToMoveItems Include="$(ResourceTemporaryFolder)/$(ResourceRepositoryName)-$(ResourceRepositoryVersion)/*.json" />
-            <ToMoveItems Include="$(ResourceTemporaryFolder)/recognition-assets/**/*.*" />
-        </ItemGroup>
-        <!-- See: https://docs.microsoft.com/en-us/visualstudio/msbuild/move-task -->
-        <Move DestinationFiles="@(ToMoveItems->'$(ResourceDestinationFolder)/%(RecursiveDir)%(Filename)%(Extension)')" SourceFiles="@(ToMoveItems)" />
-    </Target>
-    <Target Name="BeforeBuild" DependsOnTargets="Move" />
+  <PropertyGroup>
+    <ResourceBaseName>myscript-iink-recognition</ResourceBaseName>
+    <ResourceRepositoryName>myscript-recognition-assets</ResourceRepositoryName>
+    <ResourceFileExtension>zip</ResourceFileExtension>
+    <ResourceRepositoryReleaseUrl>https://github.com/jingkecn/myscript-recognition-assets/releases/download/v$(MyScriptSDKVersion)</ResourceRepositoryReleaseUrl>
+    <ResourceRepositorySourceUrl> https://github.com/jingkecn/myscript-recognition-assets/archive/refs/tags/v$(MyScriptSDKVersion).$(ResourceFileExtension)</ResourceRepositorySourceUrl>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ResourceTemporaryFolder>$(RepositoryDirectory)/shared/Resources/_temp</ResourceTemporaryFolder>
+    <ResourceDestinationFolder>$(RepositoryDirectory)/shared/Resources/Assets</ResourceDestinationFolder>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ResourceDiagram>$(ResourceBaseName)-diagram.$(ResourceFileExtension)</ResourceDiagram>
+    <ResourceMath>$(ResourceBaseName)-math.$(ResourceFileExtension)</ResourceMath>
+    <ResourceRawContent>$(ResourceBaseName)-raw-content.$(ResourceFileExtension)</ResourceRawContent>
+    <ResourceTextEnUs>$(ResourceBaseName)-text-en_US.$(ResourceFileExtension)</ResourceTextEnUs>
+    <ResourceTextZhCn>$(ResourceBaseName)-text-zh_CN.$(ResourceFileExtension)</ResourceTextZhCn>
+  </PropertyGroup>
+  <Target Name="Download" Condition="!Exists('$(ResourceTemporaryFolder)')">
+    <!--See: https://docs.microsoft.com/en-us/visualstudio/msbuild/downloadfile-task-->
+    <DownloadFile DestinationFolder="$(ResourceTemporaryFolder)" SourceUrl="$(ResourceRepositorySourceUrl)" />
+    <DownloadFile DestinationFolder="$(ResourceTemporaryFolder)" SourceUrl="$(ResourceRepositoryReleaseUrl)/$(ResourceDiagram)" />
+    <DownloadFile DestinationFolder="$(ResourceTemporaryFolder)" SourceUrl="$(ResourceRepositoryReleaseUrl)/$(ResourceMath)" />
+    <DownloadFile DestinationFolder="$(ResourceTemporaryFolder)" SourceUrl="$(ResourceRepositoryReleaseUrl)/$(ResourceRawContent)" />
+    <DownloadFile DestinationFolder="$(ResourceTemporaryFolder)" SourceUrl="$(ResourceRepositoryReleaseUrl)/$(ResourceTextEnUs)" />
+    <DownloadFile DestinationFolder="$(ResourceTemporaryFolder)" SourceUrl="$(ResourceRepositoryReleaseUrl)/$(ResourceTextZhCn)" />
+  </Target>
+  <Target Name="Unzip" DependsOnTargets="Download">
+    <ItemGroup>
+      <ToUnZipItems Include="$(ResourceTemporaryFolder)/*.zip" />
+    </ItemGroup>
+    <!--See: https://docs.microsoft.com/en-us/visualstudio/msbuild/unzip-task-->
+    <Unzip ContinueOnError="true" DestinationFolder="$(ResourceTemporaryFolder)" SourceFiles="@(ToUnZipItems)" />
+  </Target>
+  <Target Name="Move" DependsOnTargets="Unzip">
+    <ItemGroup>
+      <ToMoveItems Include="$(ResourceTemporaryFolder)/$(ResourceRepositoryName)-$(MyScriptSDKVersion)/*.json" />
+      <ToMoveItems Include="$(ResourceTemporaryFolder)/recognition-assets/**/*.*" />
+    </ItemGroup>
+    <!--See: https://docs.microsoft.com/en-us/visualstudio/msbuild/move-task-->
+    <Move DestinationFiles="@(ToMoveItems->'$(ResourceDestinationFolder)/%(RecursiveDir)%(Filename)%(Extension)')" SourceFiles="@(ToMoveItems)" />
+  </Target>
+  <Target Name="BeforeBuild" DependsOnTargets="Move" />
 </Project>
