@@ -22,10 +22,6 @@
         <muxc:NavigationView.AutoSuggestBox>
             <AutoSuggestBox QueryIcon="Find" />
         </muxc:NavigationView.AutoSuggestBox>
-        <muxc:NavigationView.Header>
-            <iink:InteractiveInkToolbar HorizontalAlignment="Center"
-                                        TargetInkCanvas="{x:Bind InteractiveInkCanvas}" />
-        </muxc:NavigationView.Header>
         <muxc:NavigationView.PaneFooter>
             <page:PageCommandBar x:Name="TopCommandBar"
                                  Background="Transparent"
@@ -45,7 +41,6 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <iink:InteractiveInkCanvas x:Name="InteractiveInkCanvas"
-                                           Background="White"
                                            Editor="{x:Bind ViewModel.Editor, Mode=OneWay}"
                                            Holding="OnHolding"
                                            MaxZoomFactor="3"
@@ -112,6 +107,8 @@
                                            Label="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=CommandPaste}" />
                     </iink:InteractiveInkCanvas.Resources>
                 </iink:InteractiveInkCanvas>
+                <iink:InteractiveInkToolbar HorizontalAlignment="Center" VerticalAlignment="Top"
+                                            TargetInkCanvas="{x:Bind InteractiveInkCanvas}" />
                 <muxc:InfoBar IsClosable="True"
                               IsOpen="{x:Bind ViewModel.IsInfoBarOpen, Mode=TwoWay}"
                               Message="{x:Bind ViewModel.InfoMessage, Mode=OneWay}"
