@@ -41,6 +41,7 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <iink:InteractiveInkCanvas x:Name="InteractiveInkCanvas"
+                                           Background="WhiteSmoke"
                                            Editor="{x:Bind ViewModel.Editor, Mode=OneWay}"
                                            Holding="OnHolding"
                                            MaxZoomFactor="3"
