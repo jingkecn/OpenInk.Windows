@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:isWindows11NotPresent="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract,14)"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     d:DesignHeight="300"
@@ -22,12 +23,11 @@
                       MaxWidth="{StaticResource ContentDialogMaxWidth}"
                       SelectionMode="None"
                       ItemClick="OnItemClick">
-                <ListView.ItemContainerStyle>
+                <isWindows11NotPresent:ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                        <Setter Property="Padding" Value="0" />
                     </Style>
-                </ListView.ItemContainerStyle>
+                </isWindows11NotPresent:ListView.ItemContainerStyle>
             </ListView>
             <Button Command="{x:Bind ViewModel.CommandManageLanguages}"
                     Content="{x:Bind Converter={StaticResource StringLocalizationConverter}, ConverterParameter=CommandManage}"
