@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:isWindows11NotPresent="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract,14)"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:vm="using:MyScript.OpenInk.Main.ViewModels"
     mc:Ignorable="d"
@@ -28,11 +29,11 @@
                       ItemTemplate="{StaticResource StorageFileListViewItemTemplate}"
                       SelectionMode="None"
                       ItemClick="OnItemClick">
-                <ListView.ItemContainerStyle>
+                <isWindows11NotPresent:ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                     </Style>
-                </ListView.ItemContainerStyle>
+                </isWindows11NotPresent:ListView.ItemContainerStyle>
             </ListView>
         </Grid>
     </muxc:NavigationView>
