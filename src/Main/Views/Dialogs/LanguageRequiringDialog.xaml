@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:isWindows11NotPresent="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract,14)"
     mc:Ignorable="d"
     Title="{x:Bind ViewModel.Book.Language.PlatformModel.NativeName, Mode=OneWay}"
     Closing="OnClosing"
@@ -21,11 +22,10 @@
                        Style="{StaticResource ContentTextBlockStyle}"
                        Text="{x:Bind ViewModel.Book.Language.PlatformModel.DisplayName, Converter={StaticResource StringLocalizationConverter}, ConverterParameter=MessageLanguageRequire, Mode=OneWay}" />
         </ListView.Header>
-        <ListView.ItemContainerStyle>
+        <isWindows11NotPresent:ListView.ItemContainerStyle>
             <Style TargetType="ListViewItem">
                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                <Setter Property="Padding" Value="0" />
             </Style>
-        </ListView.ItemContainerStyle>
+        </isWindows11NotPresent:ListView.ItemContainerStyle>
     </ListView>
 </ContentDialog>
