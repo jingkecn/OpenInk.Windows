@@ -37,12 +37,16 @@ namespace MyScript.OpenInk.Main.Services
             var progress = download.Progress;
             var received = progress.BytesReceived;
             var total = progress.TotalBytesToReceive;
-            var percent = received * 100 / total;
-            var status = progress.Status;
-            Debug.WriteLine($"{nameof(LanguageService)}.{nameof(OnProgress)}:" +
-                            $"\n\tprogress: ({percent}%) {received} / {total}" +
-                            $"\n\tstatus: {status}" +
-                            $"\n\turl: {download.RequestedUri}");
+            if (total is not 0)
+            {
+                var percent = received * 100 / total;
+                var status = progress.Status;
+                Debug.WriteLine($"{nameof(LanguageService)}.{nameof(OnProgress)}:" +
+                                $"\n\tprogress: ({percent}%) {received} / {total}" +
+                                $"\n\tstatus: {status}" +
+                                $"\n\turl: {download.RequestedUri}");
+            }
+
             var language = Languages.Single(x => x.Url == download.RequestedUri.ToString());
             OnDownloading(language, progress);
         }
